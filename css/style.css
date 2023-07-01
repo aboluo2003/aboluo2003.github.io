@@ -3100,7 +3100,7 @@ pre .javascript .function {
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  border: 10px rgba(255,0,0,0.3) double;
+  border: 3px rgba(255,0,0,0.3) solid;
   border-radius: 10px;
   -webkit-transition: border 0.5s ease;
   -moz-transition: border 0.5s ease;
@@ -3112,7 +3112,7 @@ pre .javascript .function {
   -moz-transition: border 0.5s ease;
   -ms-transition: border 0.5s ease;
   transition: border 0.5s ease;
-  border: 10px rgba(255,0,0,0.6) double;
+  border: 5px rgba(255,0,0,0.6) solid;
 }
 .sidebar-menu-link-wrap:hover .sidebar-menu-icon {
   -webkit-transition: -webkit-transform 1s ease;
@@ -3147,7 +3147,7 @@ pre .javascript .function {
 }
 .link-active {
   background: #f00;
-  border: 10px #fff double;
+  border: 3px #f00 solid;
   -webkit-box-shadow: 0 0 10px 3px rgba(255,0,0,0.3);
   box-shadow: 0 0 10px 3px rgba(255,0,0,0.3);
   opacity: 0.8;
