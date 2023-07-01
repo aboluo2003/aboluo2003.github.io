@@ -454,7 +454,7 @@ body {
   -moz-transition: background 0.2s ease;
   -ms-transition: background 0.2s ease;
   transition: background 0.2s ease;
-  background: rgba(255,255,255,0.95);
+  background: #fff;
 }
 #header-title {
   font-family: Mulish, 'Noto Serif SC', 'Noto Serif JP', Mulish, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;

@@ -18,12 +18,12 @@
     
 <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free/css/v4-font-face.min.css">
 
-    <meta name="description" content="关于懂的都懂">
+    <meta name="description" content="关于 懂的都懂">
 <meta property="og:type" content="website">
 <meta property="og:title" content="关于">
 <meta property="og:url" content="https://aboluo2003.github.io/about/index.html">
 <meta property="og:site_name" content="aboluo2003&#39;s blog">
-<meta property="og:description" content="关于懂的都懂">
+<meta property="og:description" content="关于 懂的都懂">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://aboluo2003.github.io/about/gugu.gif">
 <meta property="article:published_time" content="2023-06-27T09:45:47.000Z">
@@ -50,6 +50,10 @@
 <link rel="stylesheet" href="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 
     
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/katex@0.16.7/dist/katex.min.css">
+
     
     
     
@@ -140,15 +144,21 @@
 
         <div class="e-content article-entry" itemprop="articleBody">
             
-                <h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p>懂的都懂</p>
+                <h2 id="关于"><a class="markdownIt-Anchor" href="#关于"></a> 关于</h2>
+<p>懂的都懂</p>
 <img src="./gugu.gif">
-
 
             
         </div>
         <footer class="article-footer">
-            <a data-url="https://aboluo2003.github.io/about/index.html" data-id="cljjm99o80000m0t94jucgv4s" data-title="关于"
+            <a data-url="https://aboluo2003.github.io/about/index.html" data-id="cljjnl0ct0000swt91i0x5pt4" data-title="关于"
                class="article-share-link">分享</a>
+            
+                <a href="/about/index.html#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count" data-xid="/about/index.html"
+                          itemprop="commentCount"></span>
+                    留言
+                </a>
             
             
             
@@ -162,6 +172,10 @@
     
 </article>
 
+
+    <section id="comments" class="vcomment">
+
+    </section>
 
 
 
@@ -271,7 +285,7 @@
             
                 <div>
                     <span class="icon-brush"></span>
-                    75
+                    140
                     &nbsp;|&nbsp;
                     <span class="icon-coffee"></span>
                     00:01
@@ -378,6 +392,30 @@
 
 
 
+
+    
+<script src="https://unpkg.com/valine@1.5.1/dist/Valine.min.js"></script>
+
+    <script>
+        var GUEST_INFO = ['nick', 'mail', 'link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function (item) {
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        var recordIP = JSON.parse('true');
+        var highlight = JSON.parse('true');
+
+        new Valine({
+            el: '.vcomment',
+            appId: "lKrMO0rxT45AflE6Bn92GPDG-gzGzoHsz",
+            appKey: "LyZuzT1gJE2qWlPtmJ8axyVq",
+            placeholder: "Just go go",
+            pageSize: '10',
+            avatar: 'mp',
+            lang: 'zh-cn',
+            recordIP: recordIP,
+            highlight: highlight
+        });
+    </script>
 
 
 

@@ -46,6 +46,10 @@
 
     
     
+        
+<link rel="stylesheet" href="https://unpkg.com/katex@0.16.7/dist/katex.min.css">
+
+    
     
     
     
@@ -132,7 +136,7 @@
             <div class="post-meta">
                 <a><span class="icon-calendar"></span>2023-06-27</a>
                 
-                    <a><span class="icon-pencil"></span>75 字</a>
+                    <a><span class="icon-pencil"></span>140 字</a>
                 
                 
                     <a><span class="icon-clock"></span>1 分钟</a>
@@ -142,10 +146,12 @@
             <article class="post-article">
                 
                     Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new &amp;quot;My New Post&amp;quot;
-
+ Quick Start
+ Create a new post
+1$ hexo new &amp;quot;My New Post&amp;quot;
 More info: Writing
-Run server1$ hexo ser
+ Run server
+1$ hex
                 
             </article>
         </div>
@@ -255,7 +261,7 @@ Run server1$ hexo ser
             
                 <div>
                     <span class="icon-brush"></span>
-                    75
+                    140
                     &nbsp;|&nbsp;
                     <span class="icon-coffee"></span>
                     00:01
@@ -362,6 +368,30 @@ Run server1$ hexo ser
 
 
 
+
+    
+<script src="https://unpkg.com/valine@1.5.1/dist/Valine.min.js"></script>
+
+    <script>
+        var GUEST_INFO = ['nick', 'mail', 'link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function (item) {
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        var recordIP = JSON.parse('true');
+        var highlight = JSON.parse('true');
+
+        new Valine({
+            el: '.vcomment',
+            appId: "lKrMO0rxT45AflE6Bn92GPDG-gzGzoHsz",
+            appKey: "LyZuzT1gJE2qWlPtmJ8axyVq",
+            placeholder: "Just go go",
+            pageSize: '10',
+            avatar: 'mp',
+            lang: 'zh-cn',
+            recordIP: recordIP,
+            highlight: highlight
+        });
+    </script>
 
 
 
