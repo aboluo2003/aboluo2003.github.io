@@ -423,7 +423,8 @@ body {
   margin: 0;
 }
 #header-inner {
-  position: sticky;
+  position: fixed;
+  width: 100%;
   top: 0;
   display: -webkit-box;
   display: -moz-box;
@@ -445,6 +446,8 @@ body {
   -ms-transition: background 0.2s ease;
   transition: background 0.2s ease;
   z-index: 200;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
 }
 #header-inner:hover {
   -webkit-transition: background 0.2s ease;
