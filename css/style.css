@@ -613,7 +613,6 @@ body {
   letter-spacing: 1px;
 }
 .main-nav-icon {
-  background: url("/images/taichi.svg") no-repeat center/80%;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
@@ -2025,7 +2024,6 @@ a.article-title:hover {
 .footer-info-sep {
   width: 25px;
   opacity: 0.6;
-  background: url("/images/taichi.svg") no-repeat center/80%;
   -webkit-animation: rotate-all 3s infinite;
   -moz-animation: rotate-all 3s infinite;
   -ms-animation: rotate-all 3s infinite;
