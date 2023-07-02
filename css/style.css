@@ -3072,7 +3072,6 @@ pre .javascript .function {
 .icon-twitter:before {
   content: "\f099";
 }
-.sidebar-menu-icon,
 .sidebar-menu-link {
   color: #f00;
   opacity: 0.8;
@@ -3117,26 +3116,9 @@ pre .javascript .function {
   transition: border 0.5s ease;
   border: 5px rgba(255,0,0,0.6) solid;
 }
-.sidebar-menu-link-wrap:hover .sidebar-menu-icon {
-  -webkit-transition: -webkit-transform 1s ease;
-  -moz-transition: -moz-transform 1s ease;
-  -ms-transition: -ms-transform 1s ease;
-  transition: transform 1s ease;
-  -webkit-transform: rotate(360deg);
-  -moz-transform: rotate(360deg);
-  -ms-transform: rotate(360deg);
-  transform: rotate(360deg);
-}
 .sidebar-menu-icon {
-  background: url("/images/taichi.svg") no-repeat center/80%;
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  transform: rotate(0deg);
-  -webkit-transition: -webkit-transform 1s;
-  -moz-transition: -moz-transform 1s;
-  -ms-transition: -ms-transform 1s;
-  transition: transform 1s;
+  padding: 10px 5px;
+  color: #f77;
 }
 .sidebar-menu-link-dummy {
   position: absolute;
@@ -3154,25 +3136,14 @@ pre .javascript .function {
   -webkit-box-shadow: 0 0 10px 3px rgba(255,0,0,0.3);
   box-shadow: 0 0 10px 3px rgba(255,0,0,0.3);
   opacity: 0.8;
-  -webkit-transition: border opacity 0.5s ease;
-  -moz-transition: border opacity 0.5s ease;
-  -ms-transition: border opacity 0.5s ease;
-  transition: border opacity 0.5s ease;
-}
-.link-active:hover {
-  -webkit-transition: border opacity 0.5s ease;
-  -moz-transition: border opacity 0.5s ease;
-  -ms-transition: border opacity 0.5s ease;
-  transition: border opacity 0.5s ease;
-  opacity: 1;
 }
 .link-active .sidebar-menu-link {
   color: #fff;
   opacity: 1;
 }
 .link-active .sidebar-menu-icon {
-  opacity: 1;
-  background: url("/images/taichi-fill.svg") no-repeat center/80%;
+  color: #fff;
+  opacity: 0.9;
 }
 ::-webkit-scrollbar {
   width: 10px;
