@@ -1,0 +1,577 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-CN"
+            
+    >
+    <head>
+    <meta charset="utf-8">
+    
+
+    
+
+    
+    <title>
+        GPT 系列速览 |
+        
+        aboluo2003&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.css">
+
+    <meta name="description" content="有人读了论文然后用大白话讲出来真是好啊。李沐老师真是大好人。  GPT GPT 模型的提出是为了在大量无标注数据但稀缺有标注数据的情况下能在 NLP 任务上取得更好的效果。它的想法是先在无标注文本上训练出一个语言模型，然后再对特定的下游任务进行微调。 GPT 的架构使用 Transformer 解码器堆叠若干层，强调这里是解码器是因为解码器只能看到时间步 ttt 之前的信息，而编码器则会直接看到整">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPT 系列速览">
+<meta property="og:url" content="https://aboluo2003.github.io/2023/07/08/gpt/index.html">
+<meta property="og:site_name" content="aboluo2003&#39;s blog">
+<meta property="og:description" content="有人读了论文然后用大白话讲出来真是好啊。李沐老师真是大好人。  GPT GPT 模型的提出是为了在大量无标注数据但稀缺有标注数据的情况下能在 NLP 任务上取得更好的效果。它的想法是先在无标注文本上训练出一个语言模型，然后再对特定的下游任务进行微调。 GPT 的架构使用 Transformer 解码器堆叠若干层，强调这里是解码器是因为解码器只能看到时间步 ttt 之前的信息，而编码器则会直接看到整">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://aboluo2003.github.io/assets/1688806231520.png">
+<meta property="og:image" content="https://aboluo2003.github.io/assets/1688977780409.png">
+<meta property="og:image" content="https://aboluo2003.github.io/assets/1688964776442.png">
+<meta property="article:published_time" content="2023-07-08T07:17:33.000Z">
+<meta property="article:modified_time" content="2023-07-10T11:07:59.789Z">
+<meta property="article:author" content="aboluo2003">
+<meta property="article:tag" content="自然语言处理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://aboluo2003.github.io/assets/1688806231520.png">
+    
+        <link rel="alternate" href="/atom.xml" title="aboluo2003's blog" type="application/atom+xml">
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/typeface-source-code-pro@1.1.13/index.css">
+
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/katex@0.16.7/dist/katex.min.css">
+
+    
+    
+    
+    
+<script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CUbuntu%20Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+    <div id="container">
+        <div id="wrap">
+            <header id="header">
+    
+        <img data-src="/covers/幻像黒兎 - Journey.jpg" data-sizes="auto" alt="GPT 系列速览" class="lazyload">
+    
+    <div id="header-outer" class="outer">
+        <div id="header-title" class="inner">
+            <div id="logo-wrap">
+                
+                    
+                    
+                        <a href="/" id="logo"><h1>GPT 系列速览</h1></a>
+                    
+                
+            </div>
+            
+                
+                
+            
+        </div>
+        <div id="header-inner">
+            <nav id="main-nav">
+                <a id="main-nav-toggle" class="nav-icon"></a>
+                
+                    <span class="main-nav-link-wrap">
+                        
+                        <a class="main-nav-link" href="/">首页</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        
+                        <a class="main-nav-link" href="/archives">归档</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        
+                        <a class="main-nav-link" href="/about">关于</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        
+                        <a class="main-nav-link" href="/friend">友链</a>
+                    </span>
+                
+            </nav>
+            <nav id="sub-nav">
+                
+                    <a id="nav-rss-link" class="nav-icon" href="/atom.xml"
+                       title="RSS 订阅"></a>
+                
+                
+            </nav>
+            <div id="search-form-wrap">
+                <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://aboluo2003.github.io"></form>
+            </div>
+        </div>
+    </div>
+</header>
+
+            <div id="content" class="outer">
+                <section id="main"><article id="post-gpt" class="h-entry article article-type-post"
+         itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <div class="article-inner">
+        <div class="article-meta">
+            <div class="article-date">
+    <a href="/2023/07/08/gpt/" class="article-date-link">
+        <time datetime="2023-07-08T07:17:33.000Z"
+              itemprop="datePublished">2023-07-08</time>
+    </a>
+</div>
+
+            
+    <div class="article-category">
+        <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+    </div>
+
+
+        </div>
+        <div class="hr-line"></div>
+        
+
+        <div class="e-content article-entry" itemprop="articleBody">
+            
+                <p>有人读了论文然后用大白话讲出来真是好啊。李沐老师真是大好人。</p>
+<h2 id="gpt"><a class="markdownIt-Anchor" href="#gpt"></a> GPT</h2>
+<p>GPT 模型的提出是为了在大量无标注数据但稀缺有标注数据的情况下能在 NLP 任务上取得更好的效果。它的想法是先在无标注文本上训练出一个语言模型，然后再对特定的下游任务进行微调。</p>
+<p>GPT 的架构使用 Transformer 解码器堆叠若干层，强调这里是解码器是因为解码器只能看到时间步 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">t</span></span></span></span> 之前的信息，而编码器则会直接看到整个序列。</p>
+<p><strong>预训练</strong> 在无标注文本上训练模型最大的问题是不便于寻找损失函数，GPT 选择最大化根据每 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 个词预测下一个词的似然函数作为目标函数，其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 为上下文窗口的大小。 即最大化对数似然：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>L</mi><mn>1</mn></msub><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><msub><mi>x</mi><mi>N</mi></msub><mo stretchy="false">)</mo><mo>=</mo><munder><mo>∑</mo><mi>i</mi></munder><mi>log</mi><mo>⁡</mo><mi>P</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>∣</mo><msub><mi>x</mi><mrow><mi>i</mi><mo>−</mo><mi>k</mi></mrow></msub><mo separator="true">,</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><msub><mi>x</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L_1(x_1, \cdots, x_N) = \sum_{i} \log P(x_i \mid x_{i - k}, \cdots, x_{i - 1}) 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.327674em;vertical-align:-1.277669em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0500050000000003em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mbin mtight">−</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">L_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示这是 GPT 中第一个目标函数，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><msub><mi>x</mi><mi>N</mi></msub></mrow><annotation encoding="application/x-tex">x_1, \cdots, x_N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示文本。</p>
+<p><strong>微调</strong> 假如接下来进行一个分类的任务，那么为 GPT 添加一个线性层然后再进行 softmax，定义 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">L_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示对于每组数据预测正确的概率的对数，这是第二个需要最大化的目标函数。实际将 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">L_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">L_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 稍微结合一下效果更佳，新设置超参数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">λ</span></span></span></span>，令 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mn>3</mn></msub><mo>=</mo><msub><mi>L</mi><mn>1</mn></msub><mo>+</mo><mi>λ</mi><msub><mi>L</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">L_3 = L_1 + \lambda L_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathnormal">λ</span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 作为最终的目标函数。</p>
+<p>论文中介绍了 4 类自然语言处理任务的微调的细节：分类、蕴含（判断一句话是否蕴含另一句话）、相似性、多项选择题。其中 <code>Start</code>、<code>Extract</code> 和 <code>Delim</code> 都是特殊词元。这里最后线性层直接用 <code>Extract</code> 词元在经过 Transformer 变换得到的隐状态作为输入。</p>
+<p><img src="/assets/1688806231520.png" alt="GPT 在 4 类自然语言处理任务的细节" /></p>
+<h2 id="gpt-2"><a class="markdownIt-Anchor" href="#gpt-2"></a> GPT-2</h2>
+<p>GPT-2 是在 BERT 模型发布之后再发布的。为了击败 BERT，作者用了百万级别的数据集、15 亿的参数（BERT large 为 3.4 亿）。<span class="hidden-text">军备竞赛，确信.jpg</span></p>
+<p>在 GPT-2 中使用一个新的设定：zero-shot，意思是不使用任何有标号数据 ，这也意味着没有微调的过程。<span class="hidden-text">据说是因为光是增大模型和 BERT 相比提升很小，发一篇 paper 大家会觉得很没意思，于是换了一个更难的问题。</span></p>
+<p><strong>训练数据</strong> 来自 Reddit 中至少有 3 个 karma 的链接，有 3 个 karma 意味着还有些人觉得这个链接有帮助。这样与直接使用 Common Crawl 相比，数据质量有所提高。</p>
+<p><strong>预训练</strong></p>
+<ul>
+<li>词表使用 BPE 算法（Byte Pair Encoder，字节对编码），将每个词划分为出现频率较高的子词，以此来压缩词表大小，同时能更好地表示低频词。</li>
+<li>训练的时候采用多任务训练的方式，所有的任务训练时共用 Transformer 参数，同时让输入的形式更像自然语言（任务描述，…），例如（translate to French, 输入, 输出）。但我没有太懂它是怎么把大量的无标注文本转化为有某个具体的任务描述的有标注的数据。</li>
+</ul>
+<h2 id="gpt-3"><a class="markdownIt-Anchor" href="#gpt-3"></a> GPT-3</h2>
+<p>在 GPT-2 中发现 zero-shot 不是那么好做，但是于是由于 GPT-3 有 1750 亿可学习参数，使用梯度进行微调会导致计算代价非常高昂，不便于开发产品， GPT-3 对 zero-shot 的限制进行一些削弱，即情境学习（in-context learning）。它是指在被给定的几个任务示例或一个任务说明的情况下，模型应该能通过简单预测以补全任务中其他的实例。取决于给定的任务示例的数量，具体分为 few-shot、one-shot 和 zero-shot。</p>
+<p><strong>模型</strong> 与 GPT-2 类似，Transformer 块多叠几层，加宽，多头注意力的单个头的大小也增大，训练的批量大小也增大。但是这里的学习率下降。</p>
+<p><strong>训练数据</strong> 为了训练一个比 GPT-2 大 100 倍的模型，不得不重新考虑 Common Crawl，经管它的数据非常地脏。</p>
+<ol>
+<li>首先将 Common Crawl 中的数据作为负例，GPT-2 使用的数据集作为正例，训练一个二分类器，然后保留 Common Crawl 中被分为正例的数据。</li>
+<li>去重，如果两篇文章相似，那么我们把这篇文章去掉。具体使用了一个叫做 lsh[(Locality-Sensitive Hashing, 局部敏感哈希) 的算法，它的想法是把数据降维，使得相似的数据尽可能在降维后相近，由此来去重。</li>
+</ol>
+<p>接着再将筛选过的 Common Crawl 和之前的高质量数据合并到一起作为 GPT-3 的训练数据。</p>
+<p>其他一处有意思的内容是，GPT-3 计算量指数增加的时候，损失线性下降。</p>
+<h2 id="instructgpt"><a class="markdownIt-Anchor" href="#instructgpt"></a> InstructGPT</h2>
+<p>chatgpt 基于 instructgpt，在标注数据上更多是对话形式的数据。</p>
+<p>把模型更大，数据变多，并不意味着它能按照用户的想法去做事，有时候它能补全一个问题，有可能是因为数据中出现过，也有可能是生成一堆没有帮助的无关信息。所以接下来还是想办法去做微调去让模型更有帮助性、说更多的真话、有更好的无害性。<span class="hidden-text">但是之前声称只使用无标注数据和少量例子来学习，现在回到使用有标注数据集非常地打脸，所以 OpenAI 做后面的内容稍微包装了一下</span></p>
+<h3 id="训练的流程和数据"><a class="markdownIt-Anchor" href="#训练的流程和数据"></a> 训练的流程和数据</h3>
+<ol>
+<li>在 OpenAI 的 API 上收集到的各种问题以及由标注人员写的问题，让人去写答案，接着再用这些数据对 GPT-3 进行微调，得到的新模型称为 SFT（supervised fine-tuning，有监督微调）</li>
+<li>让模型生成答案，然后人工去对这些答案排序，然后去训练一个奖励模型 RW（対生成的答案进行打分，使得相对顺序与人工排序尽量一致）</li>
+<li>然后用得到的奖励模型通过强化学习去训练 SFT</li>
+</ol>
+<p>由于生成式的标注比判别式的标注成本更高，因此有了第 2 步和第 3 步，否则做一个足够大的 SFT 数据集，后面两步有点多余了。</p>
+<p>实际情况是由标注人员写一些问题，预训练了一个模型，作为测试版发布出来，让大家去玩，由此收集到了很多 prompt，接着利用这些 prompt 用来生成 3 个数据集：人工写答案的用于 SFT 的数据集、人工排序的用于奖励模型的数据集和最终的强化学习的数据集。</p>
+<p>为了获得高质量的数据，所以 openai 直接招了一个 40 人的标注团队，以便能在几个月之间与他们进行合作。<span class="hidden-text">讲怎么招人这块，OpenAI 讲的超详细，反而技术细节越讲越简略。</span></p>
+<h3 id="模型"><a class="markdownIt-Anchor" href="#模型"></a> 模型</h3>
+<p><strong>有监督微调</strong> 这一块和之前的 GPT 系列的微调差不多</p>
+<p><strong>奖励模型</strong> 模型具体的话直接把 SFT 中最后的 softmax 层去掉换成一个线性层输出一个数。这里发现用 175 B 参数的模型训练很不稳定，使用了一个缩小的模型。损失函数使用的是 Pairwise Ranking Loss，具体的话假如我们有一个输入 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span></span></span></span>，随机选取了两个回答 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mi>w</mi></msub></mrow><annotation encoding="application/x-tex">y_w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mi>l</mi></msub></mrow><annotation encoding="application/x-tex">y_l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mi>w</mi></msub></mrow><annotation encoding="application/x-tex">y_w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 比 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mi>l</mi></msub></mrow><annotation encoding="application/x-tex">y_l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 更好，模型为它们分别打分为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><msub><mi>y</mi><mi>w</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r(x, y_w)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><msub><mi>y</mi><mi>l</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r(x, y_l)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，那么此时的损失为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mi>log</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>σ</mi><mo stretchy="false">(</mo><mi>r</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><msub><mi>y</mi><mi>w</mi></msub><mo stretchy="false">)</mo><mo>−</mo><mi>r</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><msub><mi>y</mi><mi>l</mi></msub><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">-\log (\sigma(r(x, y_w) - r(x, y_l)))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span>，其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span> 为 Sigmoid 函数。 在整个数据集上的损失定义为在数据集中按一定分布选取 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><msub><mi>y</mi><mi>w</mi></msub><mo separator="true">,</mo><msub><mi>y</mi><mi>l</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x, y_w, y_l)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 得到的损失的期望：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>L</mi><mo>=</mo><mi mathvariant="double-struck">E</mi><mo stretchy="false">[</mo><mo>−</mo><mi>log</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>σ</mi><mo stretchy="false">(</mo><mi>r</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><msub><mi>y</mi><mi>w</mi></msub><mo stretchy="false">)</mo><mo>−</mo><mi>r</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><msub><mi>y</mi><mi>l</mi></msub><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">L = \mathbb E[-\log (\sigma(r(x, y_w) - r(x, y_l)))]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathbb">E</span><span class="mopen">[</span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">)</span><span class="mclose">)</span><span class="mclose">]</span></span></span></span></span></p>
+<p>其实相当于去让一个排在前面的选项的分数比一个排在后面的选项的分数尽可能高，对于单个输入的多个选项，我们使得这 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">(</mo><mfrac linethickness="0px"><mi>K</mi><mn>2</mn></mfrac><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\binom{K}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.272341em;vertical-align:-0.35001em;"></span><span class="mord"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9223309999999999em;"><span style="top:-2.3550000000000004em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.144em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">K</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span></span></span></span> 个分数差尽量都大一点，其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span></span></span></span> 为选项个数。</p>
+<p><strong>强化学习模型</strong> 现在我们训练好了一个用于打分的模型  RM，那么接下来的想法是去训练另一个模型 RL，它初始和 SFT 相同，接下来输入一个 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span></span></span></span>，用 RL 生成出一个 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span>，接着用 RM 去给 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span> 打分 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r(x, y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span>，我们去最大化得到的这个分数。</p>
+<p>具体的话是最大化下面这样一个目标函数：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>ϕ</mi><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>∼</mo><msup><mi>π</mi><mrow><mi>R</mi><mi>L</mi></mrow></msup></mrow></msub><mrow><mo fence="true">[</mo><mi>r</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>−</mo><mi>β</mi><mi>log</mi><mo>⁡</mo><mfrac><mrow><msup><mi>π</mi><mrow><mi>R</mi><mi>L</mi></mrow></msup><mo stretchy="false">(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><msup><mi>π</mi><mrow><mi>S</mi><mi>F</mi><mi>T</mi></mrow></msup><mo stretchy="false">(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mfrac><mo fence="true">]</mo></mrow><mo>+</mo><mi>γ</mi><msub><mi mathvariant="double-struck">E</mi><mrow><mi>x</mi><mo>∼</mo><msub><mi>D</mi><mrow><mi>p</mi><mi>r</mi><mi>e</mi><mi>t</mi><mi>r</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub></mrow></msub><mo stretchy="false">[</mo><mi>log</mi><mo>⁡</mo><mo stretchy="false">(</mo><msup><mi>π</mi><mrow><mi>R</mi><mi>L</mi></mrow></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\phi = \mathbb E_{(x, y) \sim \pi^{RL}}\left [r (x,y) - \beta \log\frac{\pi^{RL}(y\mid x)}{\pi^{SFT}(y \mid x)} \right ] + \gamma \mathbb E_{x\sim D_{pretrain}}[\log(\pi^{RL}(x))]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">ϕ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.468361em;vertical-align:-0.95003em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34479999999999994em;"><span style="top:-2.502935em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">x</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span><span class="mclose mtight">)</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7740928571428571em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span><span class="mord mathnormal mtight">L</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3720649999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">[</span></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathnormal" style="margin-right:0.05278em;">β</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5183309999999999em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.767331em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span><span class="mord mathnormal mtight">L</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">]</span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.238651em;vertical-align:-0.34731999999999996em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span><span class="mord"><span class="mord mathbb">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833100000000004em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:-0.02778em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2818857142857143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.34731999999999996em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913309999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span><span class="mord mathnormal mtight">L</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mclose">)</span><span class="mclose">]</span></span></span></span></span></p>
+<p>其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi><mo separator="true">,</mo><mi>γ</mi></mrow><annotation encoding="application/x-tex">\beta, \gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05278em;">β</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span></span></span></span> 为超参数，其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="double-struck">E</mi><mrow><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>∼</mo><msup><mi>π</mi><mrow><mi>R</mi><mi>L</mi></mrow></msup></mrow></msub></mrow><annotation encoding="application/x-tex">\mathbb E_{(x, y) \sim \pi^{RL}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0609549999999999em;vertical-align:-0.3720649999999999em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34479999999999994em;"><span style="top:-2.502935em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">x</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span><span class="mclose mtight">)</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7740928571428571em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span><span class="mord mathnormal mtight">L</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3720649999999999em;"><span></span></span></span></span></span></span></span></span></span> 表示从强化学习数据集中随机选取 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span></span></span></span>，然后用 RL 得到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span>，这样算期望，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="double-struck">E</mi><mrow><mi>x</mi><mo>∼</mo><msub><mi>D</mi><mrow><mi>p</mi><mi>r</mi><mi>e</mi><mi>t</mi><mi>r</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub></mrow></msub></mrow><annotation encoding="application/x-tex">\mathbb E_{x\sim D_{pretrain}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.03621em;vertical-align:-0.34731999999999996em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833100000000004em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:-0.02778em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2818857142857143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.34731999999999996em;"><span></span></span></span></span></span></span></span></span></span> 表示在 GPT-3 的预训练数据集中抽样。直接看个这个式子比较抽象，分三部分解释一下：</p>
+<ul>
+<li>第一个是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r(x, y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span> 这部分，这部分比较好理解，就是我需要去最大化的一个分数。</li>
+<li>第二个是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r(x, y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span> 后面带 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span> 的那一项，其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>π</mi><mrow><mi>R</mi><mi>L</mi></mrow></msup><mo stretchy="false">(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\pi^{RL}(y \mid x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0913309999999998em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span><span class="mord mathnormal mtight">L</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span> 表示把 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span></span></span></span> 扔进模型 RL 会生成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span> 的概率。这一项是用于正则化的一项，目的是希望 RL 不要偏离 SFT 太多。</li>
+<li>最后一个是从 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mrow><mi>p</mi><mi>r</mi><mi>e</mi><mi>t</mi><mi>r</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">D_{pretrain}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 中采样的那一项，这一项相当于语言自回归模型中的目标函数，旨在希望 RL 能保持语言模型一些基本的需要学习到的东西。</li>
+</ul>
+<p>最终 InstructGPT 达到的效果大概是能用 GPT-3 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mn>100</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{100}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">0</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> 的参数数量达到和 GPT-3 等同的效果。<span class="text-hidden">但其实 InstructGPT 做的优化仅去考虑了帮助性</span></p>
+<img src="/assets/1688977780409.png" width="50%" alt="最终效果对比">
+<h2 id="gpt-4"><a class="markdownIt-Anchor" href="#gpt-4"></a> GPT-4</h2>
+<p>GPT-4 是一个多模态的模型，相比之前的模型，它能允许使用图片作为输入的一部分，除此之外，各方面性能、安全性等相比 chatGPT 也有所提高。</p>
+<h3 id="训练过程"><a class="markdownIt-Anchor" href="#训练过程"></a> 训练过程</h3>
+<p>训练过程和 GPT-3 类似，加入了一些新的数据集，然后再进行 RLHF（Reinforcement learning with human feedback，通过人类反馈强化学习，也是 InstructGPT 中强化学习的那部分）。<span class="hidden-text">数据集具体有些啥，OpenAI 直接通过一段废话代过了，</span></p>
+<p><strong>预测训练效果</strong></p>
+<p>GPT-4 这样的大模型调超参数是一个很大的问题，在一个小模型上看参数效果，但由于小模型和大模型在泛化能力上差别过大，再将参数移到大模型上效果可能不佳。直接在大模型上跑参数，一是开销过大，而是等待时间也过长，完整训练一次就是以月为单位。</p>
+<p>OpenAI 发现仅用 GPT-4 训练所需算力的万分之一，就已经可以根据得到的各周期的损失预测出最终的损失。</p>
+<p><strong>安全性</strong></p>
+<p>安全性通过两方面来提升</p>
+<ul>
+<li>通过各领域专家来做测试</li>
+<li>另一个是额外训练一个分类器，判断一个 prompt 是不是敏感的，不应该去回答的。</li>
+</ul>
+<p>剩下感觉都是广告，啥都没写。</p>
+<h2 id="总结和吐槽"><a class="markdownIt-Anchor" href="#总结和吐槽"></a> 总结和吐槽</h2>
+<p>感觉 GPT 系列论文是真的一篇比一篇细节少，本来感觉 GPT-2 和 GPT-3 很多技术上的细节都没讲清楚，GPT-4 直接省略所有技术细节，论文通篇都是说自己有多强。<span class="hidden-text">“让我帮你省一点时间”</span></p>
+<img src="/assets/1688964776442.png" width="50%">
+<p>OpenAI (x)，CloseAI（√）。<span class='hidden-text'>75 页论文 74 页的废话</span></p>
+<ul>
+<li>训练模型需要考虑安全性、合法性、有效性。<span class="hidden-text">当然，就我的破笔记本而言也训练不出什么有危险言论的模型，能输出一句正常的句子就谢天谢地了。</span></li>
+<li>数据和训练方式也是机器学习中很重要的一环。<span class="hidden-text">所以别天天惦记着那逼模型了</span></li>
+</ul>
+
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="https://aboluo2003.github.io/2023/07/08/gpt/" data-id="cljwrhhop0007zwt97xhr0t2e" data-title="GPT 系列速览"
+               class="article-share-link">分享</a>
+            
+                <a href="/2023/07/08/gpt/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count" data-xid="/2023/07/08/gpt/"
+                          itemprop="commentCount"></span>
+                    留言
+                </a>
+            
+            
+            
+            
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/" rel="tag">自然语言处理</a></li></ul>
+
+
+        </footer>
+    </div>
+    
+        
+    <nav id="article-nav">
+        
+        
+            <div class="article-nav-link-wrap article-nav-link-right">
+                
+                    <img data-src="/covers/BODHI - 今夕是何年.jpg" data-sizes="auto" alt="BERT 模型学习笔记"
+                         class="lazyload">
+                
+                <a href="/2023/07/05/bert/"></a>
+                <div class="article-nav-caption">后一篇</div>
+                <h3 class="article-nav-title">
+                    
+                        BERT 模型学习笔记
+                    
+                </h3>
+            </div>
+        
+    </nav>
+
+
+    
+</article>
+
+
+    <section id="comments" class="vcomment">
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+</section>
+                
+                    <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <div class="sidebar-author">
+            <img data-src="/avatar/avatar1.jpg" data-sizes="auto" alt="aboluo2003" class="lazyload">
+            <div class="sidebar-author-name">aboluo2003</div>
+            <div class="sidebar-description">前 OIer，摸鱼人</div>
+        </div>
+        <div class="sidebar-state">
+            <div class="sidebar-state-article">
+                <div>文章</div>
+                <div class="sidebar-state-number">5</div>
+            </div>
+            <div class="sidebar-state-category">
+                <div>分类</div>
+                <div class="sidebar-state-number">2</div>
+            </div>
+            <div class="sidebar-state-tag">
+                <div>标签</div>
+                <div class="sidebar-state-number">2</div>
+            </div>
+        </div>
+        <div class="sidebar-social">
+            
+                <div class=icon-github>
+                    <a href=https://github.com/aboluo2003 itemprop="url" target="_blank"></a>
+                </div>
+            
+        </div>
+        <div class="sidebar-menu">
+            
+                <div class="sidebar-menu-link-wrap">
+                    <i class="fas fa-home sidebar-menu-icon"></i>
+                    <a class="sidebar-menu-link-dummy" href="/"></a>
+                    
+                    <div class="sidebar-menu-link">首页</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <i class="fas fa-folder-open sidebar-menu-icon"></i>
+                    <a class="sidebar-menu-link-dummy" href="/archives"></a>
+                    
+                    <div class="sidebar-menu-link">归档</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <i class="fas fa-info-circle sidebar-menu-icon"></i>
+                    <a class="sidebar-menu-link-dummy" href="/about"></a>
+                    
+                    <div class="sidebar-menu-link">关于</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <i class="fas fa-user-friends sidebar-menu-icon"></i>
+                    <a class="sidebar-menu-link-dummy" href="/friend"></a>
+                    
+                    <div class="sidebar-menu-link">友链</div>
+                </div>
+            
+        </div>
+    </div>
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/" style="font-size: 20px;">自然语言处理</a> <a href="/tags/%E9%A2%84%E8%AE%AD%E7%BB%83/" style="font-size: 10px;">预训练</a>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a></li></ul>
+        </div>
+    </div>
+
+
+    
+</aside>
+
+                
+            </div>
+            <footer id="footer">
+    <div style="width: 100%; overflow: hidden"><div class="footer-line"></div></div>
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+            <div>
+                <span class="icon-copyright"></span>
+                2020-2023
+                
+                aboluo2003
+            </div>
+            
+                <div>
+                    基于&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+                    Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+                </div>
+            
+            
+                <div>
+                    <span class="icon-brush"></span>
+                    7.6k
+                    &nbsp;|&nbsp;
+                    <span class="icon-coffee"></span>
+                    00:28
+                </div>
+            
+            
+                <div>
+                    <span class="icon-eye"></span>
+                    <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+                    &nbsp;|&nbsp;
+                    <span class="icon-user"></span>
+                    <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+                </div>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+        <nav id="mobile-nav">
+    <div class="sidebar-wrap">
+        <div class="sidebar-author">
+            <img data-src="/avatar/avatar1.jpg" data-sizes="auto" alt="aboluo2003" class="lazyload">
+            <div class="sidebar-author-name">aboluo2003</div>
+            <div class="sidebar-description">前 OIer，摸鱼人</div>
+        </div>
+        <div class="sidebar-state">
+            <div class="sidebar-state-article">
+                <div>文章</div>
+                <div class="sidebar-state-number">5</div>
+            </div>
+            <div class="sidebar-state-category">
+                <div>分类</div>
+                <div class="sidebar-state-number">2</div>
+            </div>
+            <div class="sidebar-state-tag">
+                <div>标签</div>
+                <div class="sidebar-state-number">2</div>
+            </div>
+        </div>
+        <div class="sidebar-social">
+            
+                <div class=icon-github>
+                    <a href=https://github.com/aboluo2003 itemprop="url" target="_blank"></a>
+                </div>
+            
+        </div>
+        <div class="sidebar-menu">
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">首页</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/archives"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">归档</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/about"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">关于</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/friend"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">友链</div>
+                </div>
+            
+        </div>
+    </div>
+</nav>
+
+        
+<script src="https://unpkg.com/jquery@3.7.0/dist/jquery.min.js"></script>
+
+
+<script src="https://unpkg.com/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://unpkg.com/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+    
+<script src="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+
+    
+<script src="https://unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+    
+<script src="https://unpkg.com/valine@1.5.1/dist/Valine.min.js"></script>
+
+    <script>
+        var GUEST_INFO = ['nick', 'mail', 'link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function (item) {
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        var recordIP = JSON.parse('true');
+        var highlight = JSON.parse('true');
+
+        new Valine({
+            el: '.vcomment',
+            appId: "lKrMO0rxT45AflE6Bn92GPDG-gzGzoHsz",
+            appKey: "LyZuzT1gJE2qWlPtmJ8axyVq",
+            placeholder: "Just go go",
+            pageSize: '10',
+            avatar: 'mp',
+            lang: 'zh-cn',
+            recordIP: recordIP,
+            highlight: highlight
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <div class="site-search">
+        <div class="algolia-popup popup">
+            <div class="algolia-search">
+                <span class="algolia-search-input-icon"></span>
+                <div class="algolia-search-input" id="algolia-search-input"></div>
+            </div>
+
+            <div class="algolia-results">
+                <div id="algolia-stats"></div>
+                <div id="algolia-hits"></div>
+                <div id="algolia-pagination" class="algolia-pagination"></div>
+            </div>
+
+            <span class="popup-btn-close"></span>
+        </div>
+    </div>
+    <!-- hexo injector body_end start -->
+<script src="/js/insertHighlight.js"></script>
+<!-- hexo injector body_end end --></body>
+    </html>
+

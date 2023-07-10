@@ -125,16 +125,51 @@
         
     <div class="post-wrap-left">
         
-            <a class="post-link" href="/2023/07/05/bert/"></a>
+            <a class="post-link" href="/2023/07/08/gpt/"></a>
         
         
         
         
             <div class="post-cover-left">
-                <img data-src="/covers/BODHI - 今夕是何年.jpg" data-sizes="auto" alt="BERT 模型学习笔记" class="lazyload">
+                <img data-src="/covers/幻像黒兎 - Journey.jpg" data-sizes="auto" alt="GPT 系列速览" class="lazyload">
             </div>
         
 
+        
+        <div class="post-info">
+            <div class="post-meta">
+                <a><span class="icon-calendar"></span>2023-07-08</a>
+                
+                    <a><span class="icon-pencil"></span>3.2k 字</a>
+                
+                
+                    <a><span class="icon-clock"></span>12 分钟</a>
+                
+            </div>
+            <h2 class="post-title">GPT 系列速览</h2>
+            <article class="post-article">
+                
+                    有人读了论文然后用大白话讲出来真是好啊。李沐老师真是大好人。
+ GPT
+GPT 模型的提出是为了在大量无标注数据但稀缺有标注数据的情况下能在 NLP 任务上取得更好的效果。它的想法是先在无标注文本上训练出一个语言模型，然后再对特定的下游任务进行微调。
+GPT 的架构使用 Transformer 解码器堆叠若干层，强调这里是解码器是因为解码器只能看到时间步 ttt 之前的信息，而编码器则会直接看到整个序列。
+预训练 在无标注文本上训练模型最大的问题是不便于寻找损失函数，GPT 选择最大化根据每 kkk 个词预测下一个词的似然函数作为目标函数，其中 kkk 为上下文窗口的大小。 即最大化对数似然：
+                
+            </article>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="post-wrap-right">
+        
+            <a class="post-link" href="/2023/07/05/bert/"></a>
+        
+        
+            <div class="post-cover-right">
+                <img data-src="/covers/BODHI - 今夕是何年.jpg" data-sizes="auto" alt="BERT 模型学习笔记" class="lazyload">
+            </div>
         
         <div class="post-info">
             <div class="post-meta">
@@ -161,14 +196,18 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
 
     
         
-    <div class="post-wrap-right">
+    <div class="post-wrap-left">
         
             <a class="post-link" href="/2023/07/04/word2vec-2/"></a>
         
         
-            <div class="post-cover-right">
+        
+        
+            <div class="post-cover-left">
                 <img data-src="/covers/BODHI - 再度阂眼多愿是一场噩梦.jpg" data-sizes="auto" alt="词嵌入 II" class="lazyload">
             </div>
+        
+
         
         <div class="post-info">
             <div class="post-meta">
@@ -192,14 +231,10 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
 
     
         
-    <div class="post-wrap-left">
+    <div class="post-wrap-right">
         
             <a class="post-link" href="/2023/07/03/word2vec/"></a>
         
-        
-        
-        
-
         
         <div class="post-info">
             <div class="post-meta">
@@ -223,14 +258,18 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
 
     
         
-    <div class="post-wrap-right">
+    <div class="post-wrap-left">
         
             <a class="post-link" href="/2023/06/27/hello-world/"></a>
         
         
-            <div class="post-cover-right">
-                <img data-src="/covers/84949f0d546229cad7a14ebedb580a065f78c3a8_raw.jpg" data-sizes="auto" alt="Hello World" class="lazyload">
+        
+        
+            <div class="post-cover-left">
+                <img data-src="/covers/anmi - ハイビスカス.jpg" data-sizes="auto" alt="Hello World" class="lazyload">
             </div>
+        
+
         
         <div class="post-info">
             <div class="post-meta">
@@ -268,7 +307,7 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
         <div class="sidebar-state">
             <div class="sidebar-state-article">
                 <div>文章</div>
-                <div class="sidebar-state-number">4</div>
+                <div class="sidebar-state-number">5</div>
             </div>
             <div class="sidebar-state-category">
                 <div>分类</div>
@@ -373,10 +412,10 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
             
                 <div>
                     <span class="icon-brush"></span>
-                    4.4k
+                    7.6k
                     &nbsp;|&nbsp;
                     <span class="icon-coffee"></span>
-                    00:16
+                    00:28
                 </div>
             
             
@@ -403,7 +442,7 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
         <div class="sidebar-state">
             <div class="sidebar-state-article">
                 <div>文章</div>
-                <div class="sidebar-state-number">4</div>
+                <div class="sidebar-state-number">5</div>
             </div>
             <div class="sidebar-state-category">
                 <div>分类</div>
