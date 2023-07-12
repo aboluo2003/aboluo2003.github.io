@@ -11,29 +11,29 @@
 
     
     <title>
-        友情链接 |
+        Git 使用教程 |
         
         aboluo2003&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.css">
 
-    <meta name="description" content="本站信息  备用地址：https:&#x2F;&#x2F;aboluo2003.github.io&#x2F;   友链 由于 yyf 是大鸽子，所以搬运友链工作被咕掉了。没人来催鸽的话应该会继续咕咕咕咕。                                                                aboluo2003                        老博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="友情链接">
-<meta property="og:url" content="https://aboluo2003.github.io/friend/index.html">
+    <meta name="description" content="学习 git 使用方法时，简简单单记的笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git 使用教程">
+<meta property="og:url" content="https://aboluo2003.github.io/2023/07/11/git/index.html">
 <meta property="og:site_name" content="aboluo2003&#39;s blog">
-<meta property="og:description" content="本站信息  备用地址：https:&#x2F;&#x2F;aboluo2003.github.io&#x2F;   友链 由于 yyf 是大鸽子，所以搬运友链工作被咕掉了。没人来催鸽的话应该会继续咕咕咕咕。                                                                aboluo2003                        老博客">
+<meta property="og:description" content="学习 git 使用方法时，简简单单记的笔记">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://aboluo2003.github.io/friend/avatar/20220727161110.png">
-<meta property="og:image" content="https://www.gravatar.com/avatar/9fbae1cb91834819ac74ee7a926ed62b?s=128">
-<meta property="og:image" content="https://aboluo2003.github.io/friend/avatar/20190601211212.png">
-<meta property="og:image" content="https://dream-maker-yk.github.io/images/o_id.jpg">
-<meta property="article:published_time" content="2023-07-02T07:37:01.802Z">
-<meta property="article:modified_time" content="2023-07-02T07:37:01.802Z">
+<meta property="og:image" content="https://aboluo2003.github.io/assets/1689083617003.png">
+<meta property="og:image" content="https://aboluo2003.github.io/assets/1944911-20201026161437540-1982967373.png">
+<meta property="og:image" content="https://aboluo2003.github.io/assets/1944911-20201026161743568-1696499529.png">
+<meta property="article:published_time" content="2023-07-11T06:50:38.000Z">
+<meta property="article:modified_time" content="2023-07-12T05:40:25.243Z">
 <meta property="article:author" content="aboluo2003">
+<meta property="article:tag" content="开发环境">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://aboluo2003.github.io/friend/avatar/20220727161110.png">
+<meta name="twitter:image" content="https://aboluo2003.github.io/assets/1689083617003.png">
     
         <link rel="alternate" href="/atom.xml" title="aboluo2003's blog" type="application/atom+xml">
     
@@ -71,7 +71,7 @@
         <div id="wrap">
             <header id="header">
     
-        <img data-src="/images/anmi.jpg" data-sizes="auto" alt="友情链接" class="lazyload">
+        <img data-src="/covers/幻像黒兎 - 入秋.jpg" data-sizes="auto" alt="Git 使用教程" class="lazyload">
     
     <div id="header-outer" class="outer">
         <div id="header-title" class="inner">
@@ -79,7 +79,7 @@
                 
                     
                     
-                        <a href="/" id="logo"><h1>友情链接</h1></a>
+                        <a href="/" id="logo"><h1>Git 使用教程</h1></a>
                     
                 
             </div>
@@ -128,18 +128,22 @@
 </header>
 
             <div id="content" class="outer">
-                <section id="main"><article id="page-" class="h-entry article article-type-page"
+                <section id="main"><article id="post-git" class="h-entry article article-type-post"
          itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
     <div class="article-inner">
         <div class="article-meta">
             <div class="article-date">
-    <a href="/friend/index.html" class="article-date-link">
-        <time datetime="2023-07-02T07:37:01.802Z"
-              itemprop="datePublished">2023-07-02</time>
+    <a href="/2023/07/11/git/" class="article-date-link">
+        <time datetime="2023-07-11T06:50:38.000Z"
+              itemprop="datePublished">2023-07-11</time>
     </a>
 </div>
 
             
+    <div class="article-category">
+        <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+    </div>
+
 
         </div>
         <div class="hr-line"></div>
@@ -147,84 +151,98 @@
 
         <div class="e-content article-entry" itemprop="articleBody">
             
-                <h2 id="本站信息"><a class="markdownIt-Anchor" href="#本站信息"></a> 本站信息</h2>
+                <h2 id="从这里开始"><a class="markdownIt-Anchor" href="#从这里开始"></a> 从这里开始</h2>
+<p>在要建为 git 仓库的文件夹中运行命令行或者 git bash，然后运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<p>在该命令执行完后，会在当前目录中生成一个 <code>.git</code> 文件夹，这个是 git 的版本库，除去 <code>.git</code> 外，剩下的地方为工作区。当然也可以通过 <code>git clone &lt;repo&gt; [&lt;dir&gt;]</code> 来将一个仓库拷贝到本地，repo 的话可以用这个地方的 HTTPS 或者 SSH 都可以：</p>
+<img src="/assets/1689083617003.png" width="30%">
+<p>此时再在 git 中新建文件的时候它不会被跟踪，也就是意味着即使你修改了它，然后提交修改的时候与它没有关系。</p>
+<p>使用 <code>git add &lt;name&gt;</code> 来跟踪一个目录或者一个文件</p>
+<p>如果不想要再跟踪某个文件或者目录，使用</p>
 <ul>
-<li>备用地址：<a href="https://aboluo2003.github.io/">https://aboluo2003.github.io/</a></li>
+<li><code>git rm &lt;name&gt; --cached</code> ，那么不再跟踪该文件</li>
+<li><code>git rm &lt;name&gt; -f</code>，那么将删除该文件</li>
 </ul>
-<h3 id="友链"><a class="markdownIt-Anchor" href="#友链"></a> 友链</h3>
-<p>由于 yyf 是大鸽子，所以搬运友链工作被咕掉了。没人来催鸽的话应该会继续咕咕咕咕。</p>
-<div class="friend-wrap"><div class="friend-item-wrap">
-    <a target="_blank" rel="noopener" href="https://www.cnblogs.com/yyf0309"></a>
-    <div class="friend-icon-wrap">
-      <div class="friend-icon">
-          <img data-src="./avatar/20220727161110.png" data-sizes="auto" alt="aboluo2003" class="lazyload">
-      </div>
-    </div>
-    <div class="friend-info-wrap">
-      <div class="friend-name">
-          aboluo2003 
-      </div>
-      <div class="friend-desc">
-        老博客
-      </div>
-    </div>
-  </div><div class="friend-item-wrap">
-    <a target="_blank" rel="noopener" href="https://buzhibujuelb.github.io/"></a>
-    <div class="friend-icon-wrap">
-      <div class="friend-icon">
-          <img data-src="https://www.gravatar.com/avatar/9fbae1cb91834819ac74ee7a926ed62b?s=128" data-sizes="auto" alt="不知不觉" class="lazyload">
-      </div>
-    </div>
-    <div class="friend-info-wrap">
-      <div class="friend-name">
-          不知不觉 
-      </div>
-      <div class="friend-desc">
-        贝神
-      </div>
-    </div>
-  </div><div class="friend-item-wrap">
-    <a target="_blank" rel="noopener" href="https://www.cnblogs.com/weiyanpeng/"></a>
-    <div class="friend-icon-wrap">
-      <div class="friend-icon">
-          <img data-src="./avatar/20190601211212.png" data-sizes="auto" alt="jerome_wei" class="lazyload">
-      </div>
-    </div>
-    <div class="friend-info-wrap">
-      <div class="friend-name">
-          jerome_wei 
-      </div>
-      <div class="friend-desc">
-        妹鸽鸽
-      </div>
-    </div>
-  </div><div class="friend-item-wrap">
-    <a target="_blank" rel="noopener" href="https://dream-maker-yk.github.io/"></a>
-    <div class="friend-icon-wrap">
-      <div class="friend-icon">
-          <img data-src="https://dream-maker-yk.github.io/images/o_id.jpg" data-sizes="auto" alt="dream_maker" class="lazyload">
-      </div>
-    </div>
-    <div class="friend-info-wrap">
-      <div class="friend-name">
-          dream_maker 
-      </div>
-      <div class="friend-desc">
-        崴氪崴氪
-      </div>
-    </div>
-  </div></div>
-<h3 id="换友链"><a class="markdownIt-Anchor" href="#换友链"></a> 换友链</h3>
-<p>欢迎来换友链啦，留一下您的昵称，网址和头像的地址就可以了</p>
+<p>一般使用 git 开始工作的流程是：</p>
+<ol>
+<li>用 <code>git fetch [&lt;repo&gt;] </code> 从仓库获取更新，然后再用 <code>git merge &lt;branch&gt;</code> 将下载下来的分支合并到当前分支</li>
+<li>在本地修改文件，然后用 <code>git add &lt;name&gt;</code> 暂存修改的文件</li>
+<li>检查确认修改后，用 <code>git commit -m &lt;message&gt;</code> 提交更改。</li>
+<li>最后通过 <code>git push</code> 将本地的分支版本上传到远程仓库并合并。</li>
+</ol>
+<p>这里面涉及本地文件的状态、分支以及远程仓库等，接下来将分别介绍这些内容以及每个命令具体怎么使用。</p>
+<h2 id="本地文件"><a class="markdownIt-Anchor" href="#本地文件"></a> 本地文件</h2>
+<p>在本地仓库中，本地文件的状态分为 5 类：未跟踪（Untracked）、未修改（Unmodified，版本库中的文件与本地文件一致）、已修改（Modified）、已暂存（Staged）以及已提交（Committed）。下面这张图很好地展示了几种状态之间的互相转化。<span class="hidden-text">所以这个手绘边框的风格是怎么弄的555，求浇浇</span></p>
+<p><img src="/assets/1944911-20201026161437540-1982967373.png" alt="五种状态之间的转换" /></p>
+<p>其实可以把已提交和未修改合并。可以使用 <code>git status</code> 查看工作目录中文件的状态。</p>
+<h2 id="提交更改"><a class="markdownIt-Anchor" href="#提交更改"></a> 提交更改</h2>
+<p>在第一次提交前，需要先设置用户信息，包括用户名和邮箱：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &lt;username&gt;</span><br><span class="line">git config --global user.email &lt;email&gt;</span><br></pre></td></tr></table></figure>
+<p>如果去掉 <code>--global</code> 那么仅对当前仓库有效。</p>
+<p>使用 <code>git add</code> 命令可以将文件保存到暂存区。接着使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &lt;message&gt;</span><br></pre></td></tr></table></figure>
+<p>将暂存区的内容添加到本地仓库，其中 <code>&lt;message&gt;</code> 是一段备注信息，Windows 下用双引号，Linux 下用单引号。直接使用 <code>git commit</code> 要求工作目录下没有文件处于已修改状态。可以添加 <code>-a</code> 参数，这样修改文件后就不需要使用 <code>git add</code> 将其添加到暂存区。</p>
+<p>也可以通过下面命令实现提交暂存区指定文件到本地仓库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit &lt;file1&gt; &lt;file2&gt; ... -m &lt;message&gt;</span><br></pre></td></tr></table></figure>
+<p>每次提交的内容都会生成一个 Hash 值，代表这个快照版本。可以使用 <code>git log</code> 来查看历史提交和对应的 Hash 值，也可以查看提交该版本的用户<span class="hidden-text">（这极大地方便了查这个锅是谁写的，然后发现小丑竟是我自己）</span>。加入 <code>--graph</code> 参数可以用字符绘出分支的合并情况。</p>
+<p>如果出现错误提交的时候，可以用下面两个命令来回到一个历史版本：</p>
+<ul>
+<li>
+<p><code>git reset --hard &lt;版本号&gt;</code></p>
+<p>注意该命令会删除当前版本和回退的版本之间的其他版本。</p>
+</li>
+<li>
+<p><code>git revert -n &lt;版本号&gt;</code></p>
+<p>该命令相当于新建一个历史版本的副本。</p>
+</li>
+</ul>
+<h2 id="分支"><a class="markdownIt-Anchor" href="#分支"></a> 分支</h2>
+<p>一条分支允许一条独立的开发线。使用分支也就意味着你可以从开发主线上分离来，然后在不影响主线上继续工作。</p>
+<p>git 的分支实际上是一个指向版本快照的一个指针。比如我们现在在 <code>main</code> 分支上工作，提交更改得到了一个新的快照版本 a，那么现在 <code>main</code> 分支也会向前移动，变为一个指向版本 a 的指针。</p>
+<h3 id="新建分支"><a class="markdownIt-Anchor" href="#新建分支"></a> 新建分支</h3>
+<p>新建分支的话相当于在当前快照版本上新建一个指针。通过</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch &lt;branch name&gt;</span><br></pre></td></tr></table></figure>
+<p>来新建一个分支。接着通过</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;branch name&gt;</span><br></pre></td></tr></table></figure>
+<p>来切换到新的分支上。这里 git 会直接把工作目录变为目标分支中最后一次快照版本，所以一般情况下也需要提交当前工作目录下的更改。也可以使用 <code>git checkout -b &lt;branchname&gt;</code> 来实现新建并切换分支。</p>
+<p>直接使用 <code>git branch</code> 可以查看有哪些分支，前面带 * 的表示是当前分支。</p>
+<p>另外通过 <code>git branch -d &lt;branchname&gt;</code> 可以删除分支。</p>
+<h3 id="分支合并"><a class="markdownIt-Anchor" href="#分支合并"></a> 分支合并</h3>
+<p>某些分支可能会有一些独立的内容，比如添加一些新功能等，但最终你会希望将其合并回主分支。</p>
+<p>通过 <code>git merge &lt;branchname&gt;</code> 可以将指定分支与当前分支合并。</p>
+<p>如果两个分支对同一文件进行了不同修改，此时再用 <code>git merge</code> 进行合并的时候会产生冲突。此时用 <code>git status</code> 可以查看哪些文件产生了冲突。</p>
+<ul>
+<li>如果该文件在一个分支中被删除了，那么 git 则会保留这个文件，但会提示你这个文件在合并中产生冲突</li>
+<li>如果两个文件被进行了不同的修改，那么 git 产生冲突的地方在文件中标识出来</li>
+</ul>
+<p>完成这些修改后再 <code>git commit</code> 结束合并并生成新的快照版本。</p>
+<h2 id="远程仓库"><a class="markdownIt-Anchor" href="#远程仓库"></a> 远程仓库</h2>
+<p>使用远程仓库的话方便多人协作，一般可以使用 Github，也可以自己搭 git 服务器。使用 Github 的一般需要先准备一下 SSH 授权验证，具体教程可以参考<a target="_blank" rel="noopener" href="https://www.runoob.com/git/git-remote-repo.html">菜鸟教程</a>。<span class="hidden-text">搭博客时弄过了，这里懒得自己写了。</span></p>
+<p>对于远程仓库的设置操作使用 <code>git remote</code>，具体用法如下：</p>
+<ul>
+<li><code>git remote</code> 查看远程仓库的名称</li>
+<li><code>git remote -v </code> 查看远程仓库名称和具体的地址</li>
+<li><code>git remote add &lt;name&gt; &lt;url&gt;</code> 添加一个指定名称的远程仓库</li>
+<li><code>git remote rename &lt;old name&gt; &lt;new name&gt; </code> 重命名一个远程仓库</li>
+<li><code>git remote remove &lt;name&gt;</code> 删除一个指定名称的远程仓库</li>
+</ul>
+<p>在 git 中，工作区域可以分为 4 个：工作目录（Working Directory），暂存区（Stage/Index），版本库（Repository）、远程仓库（Remote Directory），在四个工作区域之间的转化之间操作如下图所示：</p>
+<p><img src="/assets/1944911-20201026161743568-1696499529.png" alt="四个工作区域" /></p>
+<ul>
+<li><code>git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</code> 将本地的分支版本上传到远程并合并，当本地分支名与远程分支名相同的时候，远程分支名可以省略。使用 <code>-u</code> 参数可以指定推送目标后，此后可以直接使用 <code>git push</code> 进行上传。</li>
+<li><code>git fetch &lt;repo&gt;</code> 将远程仓库的内容同步到本地仓库，但不会更改工作目录中的内容，当没有指定远程仓库的时候将从 <code>origin</code> 获取。</li>
+<li><code>git fetch &lt;repo&gt; &lt;branch name&gt;</code> 获取远程仓库中某个特定的分支</li>
+<li><code>git pull &lt;repo&gt;</code> 将远程跟踪的分支更新到本地分支，相当于 <code>fetch</code> + <code>merge</code>。使用 <code>git checkout --track &lt;remote branch&gt;</code> 将新建一个跟踪该远程分支的同名分支。</li>
+</ul>
 
             
         </div>
         <footer class="article-footer">
-            <a data-url="https://aboluo2003.github.io/friend/index.html" data-id="cljwrhhon0002zwt95xcp9ksn" data-title="友情链接"
+            <a data-url="https://aboluo2003.github.io/2023/07/11/git/" data-id="cljxxo8rh0000ewt96e1n4uof" data-title="Git 使用教程"
                class="article-share-link">分享</a>
             
-                <a href="/friend/index.html#comments" class="article-comment-link">
-                    <span class="post-comments-count valine-comment-count" data-xid="/friend/index.html"
+                <a href="/2023/07/11/git/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count" data-xid="/2023/07/11/git/"
                           itemprop="commentCount"></span>
                     留言
                 </a>
@@ -232,11 +250,32 @@
             
             
             
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" rel="tag">开发环境</a></li></ul>
+
 
         </footer>
     </div>
     
         
+    <nav id="article-nav">
+        
+        
+            <div class="article-nav-link-wrap article-nav-link-right">
+                
+                    <img data-src="/covers/幻像黒兎 - Journey.jpg" data-sizes="auto" alt="GPT 系列速览"
+                         class="lazyload">
+                
+                <a href="/2023/07/08/gpt/"></a>
+                <div class="article-nav-caption">后一篇</div>
+                <h3 class="article-nav-title">
+                    
+                        GPT 系列速览
+                    
+                </h3>
+            </div>
+        
+    </nav>
+
 
     
 </article>
