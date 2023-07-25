@@ -1,0 +1,547 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-CN"
+            
+    >
+    <head>
+    <meta charset="utf-8">
+    
+
+    
+
+    
+    <title>
+        LangChain 学习笔记 |
+        
+        aboluo2003&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.css">
+
+    <meta name="description" content="关于 LangChain 大致的运行过程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LangChain 学习笔记">
+<meta property="og:url" content="https://aboluo2003.github.io/2023/07/24/langchain/index.html">
+<meta property="og:site_name" content="aboluo2003&#39;s blog">
+<meta property="og:description" content="关于 LangChain 大致的运行过程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://aboluo2003.github.io/assets/1690173536693.png">
+<meta property="og:image" content="https://aboluo2003.github.io/assets/1690188520416.png">
+<meta property="og:image" content="https://aboluo2003.github.io/assets/1690189025178.png">
+<meta property="article:published_time" content="2023-07-24T03:42:51.000Z">
+<meta property="article:modified_time" content="2023-07-25T09:17:40.636Z">
+<meta property="article:author" content="aboluo2003">
+<meta property="article:tag" content="自然语言处理">
+<meta property="article:tag" content="开发环境">
+<meta property="article:tag" content="大模型">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://aboluo2003.github.io/assets/1690173536693.png">
+    
+        <link rel="alternate" href="/atom.xml" title="aboluo2003's blog" type="application/atom+xml">
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/typeface-source-code-pro@1.1.13/index.css">
+
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/katex@0.16.7/dist/katex.min.css">
+
+    
+    
+    
+    
+<script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CUbuntu%20Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+    <div id="container">
+        <div id="wrap">
+            <header id="header">
+    
+        <img data-src="/covers/BODHI - 深海少女.jpg" data-sizes="auto" alt="LangChain 学习笔记" class="lazyload">
+    
+    <div id="header-outer" class="outer">
+        <div id="header-title" class="inner">
+            <div id="logo-wrap">
+                
+                    
+                    
+                        <a href="/" id="logo"><h1>LangChain 学习笔记</h1></a>
+                    
+                
+            </div>
+            
+                
+                
+            
+        </div>
+        <div id="header-inner">
+            <nav id="main-nav">
+                <a id="main-nav-toggle" class="nav-icon"></a>
+                
+                    <span class="main-nav-link-wrap">
+                        
+                        <a class="main-nav-link" href="/">首页</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        
+                        <a class="main-nav-link" href="/archives">归档</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        
+                        <a class="main-nav-link" href="/about">关于</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        
+                        <a class="main-nav-link" href="/friend">友链</a>
+                    </span>
+                
+            </nav>
+            <nav id="sub-nav">
+                
+                    <a id="nav-rss-link" class="nav-icon" href="/atom.xml"
+                       title="RSS 订阅"></a>
+                
+                
+            </nav>
+            <div id="search-form-wrap">
+                <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://aboluo2003.github.io"></form>
+            </div>
+        </div>
+    </div>
+</header>
+
+            <div id="content" class="outer">
+                <section id="main"><article id="post-langchain" class="h-entry article article-type-post"
+         itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <div class="article-inner">
+        <div class="article-meta">
+            <div class="article-date">
+    <a href="/2023/07/24/langchain/" class="article-date-link">
+        <time datetime="2023-07-24T03:42:51.000Z"
+              itemprop="datePublished">2023-07-24</time>
+    </a>
+</div>
+
+            
+    <div class="article-category">
+        <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+    </div>
+
+
+        </div>
+        <div class="hr-line"></div>
+        
+
+        <div class="e-content article-entry" itemprop="articleBody">
+            
+                <p>LangChain 是一个框架，它旨在帮助开发人员更好地利用语言模型来构建应用。大语言模型对自然语言有一定理解能力，但是其逻辑、计算和搜索能力等方面能力有限，同时训练结束后模型便固定下来，对于新产生的各种信息便不会被模型学习。LangChain 的想法在大模型的基础上，集成一些工具。比如我想要解决一个问题，大模型可以通过工具来获取一些信息，然后再根据这些工具得到的信息由大模型生成最终的答案。</p>
+<img src="/assets/1690173536693.png" alt="LangChain 应用场景" width="70%" />
+<p>下面随便瞎记一些东西，应该会不定期更新。实验室里与我工作无关的内容，没学，估计下面也不会写。如果下面看到什么地方感觉缺了很多，完全不能用那种，那应该是我不用做这部分工作，所以没学。</p>
+<h2 id="一些应用的流程"><a class="markdownIt-Anchor" href="#一些应用的流程"></a> 一些应用的流程</h2>
+<h3 id="基于本地知识库问答"><a class="markdownIt-Anchor" href="#基于本地知识库问答"></a> 基于本地知识库问答</h3>
+<img src="/assets/1690188520416.png" alt="基于本地知识库问答的实现原理" width="70%" />
+<p>它的想法是将本地文本库读入，由于文本很长，所以将其拆分为一小段一小段的，接着通过嵌入将其转化为语义向量存储，这个便是<strong>知识库</strong>。对于查询操作，经过相同的嵌入处理将其转化为查询向量，接着通过向量的相似度查询到最相关的语段，将这些语段添加上下文，接着再进行一些去重，再由这些信息生成 prompt，将其输入到大语言模型（LLM）中。这一步如下图所示：</p>
+<img src="/assets/1690189025178.png" width="70%" />
+<p>这些过程在 LangChain 中都有实现。</p>
+<h2 id="关于-langchain-的使用"><a class="markdownIt-Anchor" href="#关于-langchain-的使用"></a> 关于 LangChain 的使用</h2>
+<h3 id="部署大模型"><a class="markdownIt-Anchor" href="#部署大模型"></a> 部署大模型</h3>
+<p>虽然自己电脑显存很小，但是发现可以嫖 <a href="colab.research.google.com">Google colab</a> 有 15G 显存的 GPU。</p>
+<p>在左上角 <code>代码执行程序</code> 里面 <code>更改运行时类型</code> 里面选择有 GPU 的就能开用了。如果没有这个选项栏，可能是和我一样折叠了，点一下右上角的箭头就可以看到了。</p>
+<p>不氪金的话，Google 不给你终端，但是在 jupyter 里面语句最前面加 <code>%</code> 和 <code>!</code> 可以执行 bash 脚本。具体区别目前还不是太清楚，但改当前目录的时候要用 <code>%</code>。</p>
+<p>Colab 的服务器不会保存你的任何文件，连接结束后，新产生的各种文件都会丢失。但是可以挂载 Google 云端硬盘，直接对 Google 云盘内的东西进行操作。挂载 Google 硬盘后，可以用下面命令切换到 Google 云端硬盘的根目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%<span class="built_in">cd</span> <span class="string">&#x27;/content/drive/MyDrive/&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>接着可以下载大模型。这里用 chatglm2-6b-int4 为例，新建一个目录，切换到这个目录下，然后用下面代码从 HuggingFace 上下载模型下来。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">required_files = [<span class="string">&#x27;LICENSE&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;MODEL_LICENSE&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;README.md&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;config.json&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;configuration_chatglm.py&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;modeling_chatglm.py&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;quantization.py&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;ice_text.model&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;quantization_kernels.c&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;quantization_kernels_parallel.c&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;tokenization_chatglm.py&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;tokenizer_config.json&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;pytorch_model.bin&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;.gitattributes&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> required_files :</span><br><span class="line">  cmd = <span class="string">f&#x27;wget https://huggingface.co/THUDM/chatglm-6b-int4/resolve/main/<span class="subst">&#123;name&#125;</span>&#x27;</span></span><br><span class="line">  os.system(cmd)</span><br></pre></td></tr></table></figure>
+<p>接着通过下面的代码可以导入大模型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tokenizer = AutoTokenizer.from_pretrained(<span class="string">&quot;data/pretrained_models/chatglm2-6b-int4&quot;</span>, trust_remote_code=<span class="literal">True</span>)</span><br><span class="line">model = AutoModel.from_pretrained(<span class="string">&quot;data/pretrained_models/chatglm2-6b-int4&quot;</span>, trust_remote_code=<span class="literal">True</span>).to(torch.device(<span class="string">&#x27;cuda&#x27;</span>)).half()</span><br><span class="line">model = model.<span class="built_in">eval</span>()</span><br></pre></td></tr></table></figure>
+<p>虽然不太清楚 <code>.half()</code> 是做什么用的，但之前没加的时候报过奇奇怪怪的错误。</p>
+<p>要在 LangChain 中使用的话需要用 <code>langchain.llms.base.LLM</code> 封装一下。</p>
+<h3 id="运行流程"><a class="markdownIt-Anchor" href="#运行流程"></a> 运行流程</h3>
+<p>这里记一下 LangChain 中 <code>ZeroShotAgent</code> 大致的一个运行流程。<code>Agent</code> 做的事就是连接 LLM 和工具，当然工具可能会有查询数据库之类，<code>ZeroShotAgent</code> 用的是 <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2210.03629.pdf">ReAct 框架</a>。不想看论文的话，这里有一个<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV16u411b7bq/">视频</a>介绍它的想法。ReAct 是提示工程的一种，它通过设计 prompt 来让大模型输出更有帮助的结果。</p>
+<p>它主要的内容是让 LLM 先写出想法，然后再由 LLM 采取行动，接着根据获得的反馈（观察），继续思考、采取行动或者结束。</p>
+<p>在 <code>ZeroShotAgent</code> 中这部分的具体流程大概如下：</p>
+<ul>
+<li>
+<p>首先需要自定义工具 <code>langchain.tools.BaseTool</code> 或者利用一些 LangChain 中现成的工具</p>
+</li>
+<li>
+<p>在 <code>prompt.py</code> 中定义了一些与 prompt 有关的常量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">PREFIX = <span class="string">&quot;&quot;&quot;Answer the following questions as best you can. You have access to the following tools:&quot;&quot;&quot;</span></span><br><span class="line">FORMAT_INSTRUCTIONS = <span class="string">&quot;&quot;&quot;Use the following format:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Question: the input question you must answer</span></span><br><span class="line"><span class="string">Thought: you should always think about what to do</span></span><br><span class="line"><span class="string">Action: the action to take, should be one of [&#123;tool_names&#125;]</span></span><br><span class="line"><span class="string">Action Input: the input to the action</span></span><br><span class="line"><span class="string">Observation: the result of the action</span></span><br><span class="line"><span class="string"><span class="meta">... </span>(this Thought/Action/Action Input/Observation can repeat N times)</span></span><br><span class="line"><span class="string">Thought: I now know the final answer</span></span><br><span class="line"><span class="string">Final Answer: the final answer to the original input question&quot;&quot;&quot;</span></span><br><span class="line">SUFFIX = <span class="string">&quot;&quot;&quot;Begin!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Question: &#123;input&#125;</span></span><br><span class="line"><span class="string">Thought:&#123;agent_scratchpad&#125;&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>接着生成 prompt 的时候会把它们拼接起来，同时将工具的名称和描述信息加入 prompt：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@classmethod</span></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">create_prompt</span>(<span class="params"></span></span><br><span class="line"><span class="params">       cls,</span></span><br><span class="line"><span class="params">       tools: <span class="type">Sequence</span>[BaseTool],</span></span><br><span class="line"><span class="params">       prefix: <span class="built_in">str</span> = PREFIX,</span></span><br><span class="line"><span class="params">       suffix: <span class="built_in">str</span> = SUFFIX,</span></span><br><span class="line"><span class="params">       format_instructions: <span class="built_in">str</span> = FORMAT_INSTRUCTIONS,</span></span><br><span class="line"><span class="params">       input_variables: <span class="type">Optional</span>[<span class="type">List</span>[<span class="built_in">str</span>]] = <span class="literal">None</span>,</span></span><br><span class="line"><span class="params">   </span>) -&gt; PromptTemplate:</span><br><span class="line">       <span class="string">&quot;&quot;&quot;Create prompt in the style of the zero shot agent.</span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">       Args:</span></span><br><span class="line"><span class="string">           tools: List of tools the agent will have access to, used to format the</span></span><br><span class="line"><span class="string">               prompt.</span></span><br><span class="line"><span class="string">           prefix: String to put before the list of tools.</span></span><br><span class="line"><span class="string">           suffix: String to put after the list of tools.</span></span><br><span class="line"><span class="string">           input_variables: List of input variables the final prompt will expect.</span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">       Returns:</span></span><br><span class="line"><span class="string">           A PromptTemplate with the template assembled from the pieces here.</span></span><br><span class="line"><span class="string">       &quot;&quot;&quot;</span></span><br><span class="line">       tool_strings = <span class="string">&quot;\n&quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;tool.name&#125;</span>: <span class="subst">&#123;tool.description&#125;</span>&quot;</span> <span class="keyword">for</span> tool <span class="keyword">in</span> tools])</span><br><span class="line">       tool_names = <span class="string">&quot;, &quot;</span>.join([tool.name <span class="keyword">for</span> tool <span class="keyword">in</span> tools])</span><br><span class="line">       format_instructions = format_instructions.<span class="built_in">format</span>(tool_names=tool_names)</span><br><span class="line">       template = <span class="string">&quot;\n\n&quot;</span>.join([prefix, tool_strings, format_instructions, suffix])</span><br><span class="line">       <span class="keyword">if</span> input_variables <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">           input_variables = [<span class="string">&quot;input&quot;</span>, <span class="string">&quot;agent_scratchpad&quot;</span>]</span><br><span class="line">       <span class="keyword">return</span> PromptTemplate(template=template, input_variables=input_variables)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>接着用户输入，这部分内容是 input，然后由此生成 prompt 提供给 LLM，接着在 LLM 输出中包含停止词（<code>&quot;\nObservation: &quot;</code> 等）的时候将其截断，提取其中 <code>Action</code> 和 <code>Action Input</code> 两处中的内容，根据 <code>Action</code> 去匹配工具，将 <code>Action Input</code> 的内容提供给工具</p>
+</li>
+<li>
+<p>接着将工具的返回信息接在 <code>Observation:</code> 后面。接着将这整个新产生的内容接在变量 <code>agent_scratchpad</code> 后面。</p>
+</li>
+<li>
+<p>然后再利用上面的 prompt 模板重新生成 prompt 提供给 LLM，由此继续，直到达到终止的判断条件。</p>
+</li>
+<li>
+<p>最后返回 LLM 最终的数据。</p>
+</li>
+</ul>
+<p><span class="hidden-text">这中间可以修改 prompt 的模板，但学长代码还没怎么看懂，最后终止的条件也还没看懂。</span></p>
+
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="https://aboluo2003.github.io/2023/07/24/langchain/" data-id="clkgmz6tz000lqst9emknd86t" data-title="LangChain 学习笔记"
+               class="article-share-link">分享</a>
+            
+                <a href="/2023/07/24/langchain/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count" data-xid="/2023/07/24/langchain/"
+                          itemprop="commentCount"></span>
+                    留言
+                </a>
+            
+            
+            
+            
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag">大模型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" rel="tag">开发环境</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/" rel="tag">自然语言处理</a></li></ul>
+
+
+        </footer>
+    </div>
+    
+        
+    <nav id="article-nav">
+        
+        
+            <div class="article-nav-link-wrap article-nav-link-right">
+                
+                    <img data-src="/covers/幻像黒兎 - 入秋.jpg" data-sizes="auto" alt="Git 使用教程"
+                         class="lazyload">
+                
+                <a href="/2023/07/11/git/"></a>
+                <div class="article-nav-caption">后一篇</div>
+                <h3 class="article-nav-title">
+                    
+                        Git 使用教程
+                    
+                </h3>
+            </div>
+        
+    </nav>
+
+
+    
+</article>
+
+
+    <section id="comments" class="vcomment">
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+</section>
+                
+                    <aside id="sidebar">
+    <div class="sidebar-wrap">
+        <div class="sidebar-author">
+            <img data-src="/avatar/avatar1.jpg" data-sizes="auto" alt="aboluo2003" class="lazyload">
+            <div class="sidebar-author-name">aboluo2003</div>
+            <div class="sidebar-description">前 OIer，摸鱼人</div>
+        </div>
+        <div class="sidebar-state">
+            <div class="sidebar-state-article">
+                <div>文章</div>
+                <div class="sidebar-state-number">7</div>
+            </div>
+            <div class="sidebar-state-category">
+                <div>分类</div>
+                <div class="sidebar-state-number">2</div>
+            </div>
+            <div class="sidebar-state-tag">
+                <div>标签</div>
+                <div class="sidebar-state-number">5</div>
+            </div>
+        </div>
+        <div class="sidebar-social">
+            
+                <div class=icon-github>
+                    <a href=https://github.com/aboluo2003 itemprop="url" target="_blank"></a>
+                </div>
+            
+        </div>
+        <div class="sidebar-menu">
+            
+                <div class="sidebar-menu-link-wrap">
+                    <i class="fas fa-home sidebar-menu-icon"></i>
+                    <a class="sidebar-menu-link-dummy" href="/"></a>
+                    
+                    <div class="sidebar-menu-link">首页</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <i class="fas fa-folder-open sidebar-menu-icon"></i>
+                    <a class="sidebar-menu-link-dummy" href="/archives"></a>
+                    
+                    <div class="sidebar-menu-link">归档</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <i class="fas fa-info-circle sidebar-menu-icon"></i>
+                    <a class="sidebar-menu-link-dummy" href="/about"></a>
+                    
+                    <div class="sidebar-menu-link">关于</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <i class="fas fa-user-friends sidebar-menu-icon"></i>
+                    <a class="sidebar-menu-link-dummy" href="/friend"></a>
+                    
+                    <div class="sidebar-menu-link">友链</div>
+                </div>
+            
+        </div>
+    </div>
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">大模型</a> <a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 15px;">开发环境</a> <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">强化学习</a> <a href="/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/" style="font-size: 20px;">自然语言处理</a> <a href="/tags/%E9%A2%84%E8%AE%AD%E7%BB%83/" style="font-size: 10px;">预训练</a>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a></li></ul>
+        </div>
+    </div>
+
+
+    
+</aside>
+
+                
+            </div>
+            <footer id="footer">
+    <div style="width: 100%; overflow: hidden"><div class="footer-line"></div></div>
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+            <div>
+                <span class="icon-copyright"></span>
+                2020-2023
+                
+                aboluo2003
+            </div>
+            
+                <div>
+                    基于&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+                    Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+                </div>
+            
+            
+                <div>
+                    <span class="icon-brush"></span>
+                    11.2k
+                    &nbsp;|&nbsp;
+                    <span class="icon-coffee"></span>
+                    00:41
+                </div>
+            
+            
+                <div>
+                    <span class="icon-eye"></span>
+                    <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+                    &nbsp;|&nbsp;
+                    <span class="icon-user"></span>
+                    <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+                </div>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+        <nav id="mobile-nav">
+    <div class="sidebar-wrap">
+        <div class="sidebar-author">
+            <img data-src="/avatar/avatar1.jpg" data-sizes="auto" alt="aboluo2003" class="lazyload">
+            <div class="sidebar-author-name">aboluo2003</div>
+            <div class="sidebar-description">前 OIer，摸鱼人</div>
+        </div>
+        <div class="sidebar-state">
+            <div class="sidebar-state-article">
+                <div>文章</div>
+                <div class="sidebar-state-number">7</div>
+            </div>
+            <div class="sidebar-state-category">
+                <div>分类</div>
+                <div class="sidebar-state-number">2</div>
+            </div>
+            <div class="sidebar-state-tag">
+                <div>标签</div>
+                <div class="sidebar-state-number">5</div>
+            </div>
+        </div>
+        <div class="sidebar-social">
+            
+                <div class=icon-github>
+                    <a href=https://github.com/aboluo2003 itemprop="url" target="_blank"></a>
+                </div>
+            
+        </div>
+        <div class="sidebar-menu">
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">首页</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/archives"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">归档</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/about"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">关于</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/friend"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">友链</div>
+                </div>
+            
+        </div>
+    </div>
+</nav>
+
+        
+<script src="https://unpkg.com/jquery@3.7.0/dist/jquery.min.js"></script>
+
+
+<script src="https://unpkg.com/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://unpkg.com/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+    
+<script src="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+
+    
+<script src="https://unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+    
+<script src="https://unpkg.com/valine@1.5.1/dist/Valine.min.js"></script>
+
+    <script>
+        var GUEST_INFO = ['nick', 'mail', 'link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function (item) {
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        var recordIP = JSON.parse('true');
+        var highlight = JSON.parse('true');
+
+        new Valine({
+            el: '.vcomment',
+            appId: "lKrMO0rxT45AflE6Bn92GPDG-gzGzoHsz",
+            appKey: "LyZuzT1gJE2qWlPtmJ8axyVq",
+            placeholder: "Just go go",
+            pageSize: '10',
+            avatar: 'mp',
+            lang: 'zh-cn',
+            recordIP: recordIP,
+            highlight: highlight
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <div class="site-search">
+        <div class="algolia-popup popup">
+            <div class="algolia-search">
+                <span class="algolia-search-input-icon"></span>
+                <div class="algolia-search-input" id="algolia-search-input"></div>
+            </div>
+
+            <div class="algolia-results">
+                <div id="algolia-stats"></div>
+                <div id="algolia-hits"></div>
+                <div id="algolia-pagination" class="algolia-pagination"></div>
+            </div>
+
+            <span class="popup-btn-close"></span>
+        </div>
+    </div>
+    <!-- hexo injector body_end start -->
+<script src="/js/insertHighlight.js"></script>
+<!-- hexo injector body_end end --></body>
+    </html>
+
