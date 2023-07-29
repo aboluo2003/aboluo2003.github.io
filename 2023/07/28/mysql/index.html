@@ -18,16 +18,16 @@
     
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.css">
 
-    <meta name="description" content="安装 MySql 由于 colab 没有 yum 也没有 rpm，也没有 systemctl，然后好不容易搜索到一份用 apt-get 安装的代码，试了试能跑，然后运行的时候找不到服务 mysql。折腾两天，没搞定，然后换了个安装教程成功了。哇，真神奇，原来是通过这样的方式解决的  直接运行下面命令安装 mysql 12!sudo apt update!sudo apt install mysq">
+    <meta name="description" content="简易教程 (x) 简陋笔记 (√)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySql 简易教程">
 <meta property="og:url" content="https://aboluo2003.github.io/2023/07/28/mysql/index.html">
 <meta property="og:site_name" content="aboluo2003&#39;s blog">
-<meta property="og:description" content="安装 MySql 由于 colab 没有 yum 也没有 rpm，也没有 systemctl，然后好不容易搜索到一份用 apt-get 安装的代码，试了试能跑，然后运行的时候找不到服务 mysql。折腾两天，没搞定，然后换了个安装教程成功了。哇，真神奇，原来是通过这样的方式解决的  直接运行下面命令安装 mysql 12!sudo apt update!sudo apt install mysq">
+<meta property="og:description" content="简易教程 (x) 简陋笔记 (√)">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://aboluo2003.github.io/emoji/%E5%BF%83%E6%B5%B7%20-%20%E7%AC%91.gif">
 <meta property="article:published_time" content="2023-07-28T12:07:39.000Z">
-<meta property="article:modified_time" content="2023-07-28T15:42:30.350Z">
+<meta property="article:modified_time" content="2023-07-29T05:11:55.833Z">
 <meta property="article:author" content="aboluo2003">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
@@ -162,8 +162,46 @@
 <p>进入大概是 mysql 的命令行的地方。密码直接输入回车就可以了。</p>
 <h2 id="mysql-命令"><a class="markdownIt-Anchor" href="#mysql-命令"></a> MySql 命令</h2>
 <h3 id="数据库"><a class="markdownIt-Anchor" href="#数据库"></a> 数据库</h3>
-<h3 id="变量类型"><a class="markdownIt-Anchor" href="#变量类型"></a> 变量类型</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 创建一个名为 RUNOOB 的数据库</span><br><span class="line">create DATABASE RUNOOB;</span><br><span class="line"># 删除一个名为 RUNOOB 的数据库</span><br><span class="line">drop database RUNOOB;</span><br><span class="line"># 选择一个名为 RUNOOB 的数据库</span><br><span class="line">use RUNOOB;</span><br><span class="line"># 查看已有的数据库</span><br><span class="line">show databases;</span><br></pre></td></tr></table></figure>
+<h3 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h3>
+<p>数据类型可以分为数值、日期和字符串三类，具体还是见<a target="_blank" rel="noopener" href="https://www.runoob.com/mysql/mysql-data-types.html">菜鸟教程</a>。<span class="hidden-text">主要是懒得搬运了</span></p>
 <h3 id="数据表"><a class="markdownIt-Anchor" href="#数据表"></a> 数据表</h3>
+<p>通过下面命令可以创建一个数据表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS `runoob_tbl`(</span><br><span class="line">   `runoob_id` INT UNSIGNED AUTO_INCREMENT,</span><br><span class="line">   `runoob_title` VARCHAR(100) NOT NULL,</span><br><span class="line">   `runoob_author` VARCHAR(40) NOT NULL,</span><br><span class="line">   `submission_date` DATE,</span><br><span class="line">   PRIMARY KEY ( `runoob_id` )</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
+<p>其中 <code>runoob_tbl</code> 是数据表的名称，后面的括号中每一项先是一列的名称，接着是它的数据类型或者相关的一些属性。</p>
+<ul>
+<li>其中 <code>AUTO_INCREMENT</code> 是指自增的属性，类似于 id，每插入一条增加 1。</li>
+<li><code>NOT NULL</code> 用于设置该列不允许有缺失，当插入一条该列为缺失字段的记录时会报错。</li>
+<li><code>PRIMARY KEY</code> 关键字用于定义列为主键。如果定义多列为主键，列之间用逗号分隔。</li>
+<li><code>VARCHAR</code> 是指可变长的字符串，其中括号中的数字指的是最大长度。</li>
+<li><code>ENGINE</code> 设置存储引擎，<code>CHARSET</code> 设置编码。</li>
+</ul>
+<p>关于数据表本身还有一些其他的命令：</p>
+<ul>
+<li><code>show tables;</code> ：显示当前数据库中的数据表</li>
+<li><code>desc runoob_tbl;</code>：描述指定的数据表</li>
+<li><code>drop table runoob_tbl;</code>：删除指定的数据表</li>
+</ul>
+<h3 id="插入和查询数据"><a class="markdownIt-Anchor" href="#插入和查询数据"></a> 插入和查询数据</h3>
+<p>MySql 中插入语句的语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table_name ( field1, field2,..., fieldN )</span><br><span class="line">                       VALUES</span><br><span class="line">                       ( value1, value2,..., valueN );</span><br></pre></td></tr></table></figure>
+<p>例如我们可以用下面的语句来插入一条数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO runoob_tbl (runoob_title, runoob_author, submission_date)</span><br><span class="line">	VALUES (&quot;学习 PHP&quot;, &quot;菜鸟教程&quot;, NOW());</span><br></pre></td></tr></table></figure>
+<p>在 MySql 中一般可以用 select 语句来进行查询：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name FROM table_name [WHERE Clause] [LIMIT N] [OFFSET M]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以同时在多个数据表中查询数据，用逗号分隔这些数据表名称即可。</li>
+<li>也可以同时查询多个列，也是用逗号分隔。</li>
+<li>可以用 <code>*</code> 作为列的名称，这样会查询所有列的数据。</li>
+<li><code>WHERE</code> 用于限定条件，接下来会介绍。</li>
+<li><code>LIMIT </code> 限制返回的记录数的上限。</li>
+<li><code>OFFSET</code> 表示查询的偏移量，默认为 0。</li>
+</ul>
+<p><strong>WHERE 子句</strong></p>
+<p>WHERE 用于限定查询的记录需要满足的条件。可以用 <code>OR</code> 以及 <code>AND</code> 连接多个条件。每个条件关于某个属性取值的，例如 <code>Money &gt;= 30</code>，其中 <code>Money </code> 是某一列的名称。</p>
+<p>比较运算符除了相等是单个等号，剩下都和通用的编程语言类似。</p>
+<p>MySql 比较字符串的时候会忽略大小写，需要在加入 <code>BINARY</code> 关键字来区分大小写。例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * from runoob_tbl WHERE BINARY runoob_author=&#x27;runoob.com&#x27;;</span><br></pre></td></tr></table></figure>
 <h2 id="python-连接-mysql-数据库"><a class="markdownIt-Anchor" href="#python-连接-mysql-数据库"></a> Python 连接 MySql 数据库</h2>
 <p>通过上面的方法安装，得到的 root 账户授权好像是一些奇怪的方式，直接连接不太好弄。先通过下面命令设置一下密码（这里直接把密码设置为 123456）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED WITH mysql_native_password by &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
@@ -171,6 +209,21 @@
 <p>然后通过</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db = pymysql.connect(host = <span class="string">&#x27;localhost&#x27;</span>, user = <span class="string">&#x27;root&#x27;</span>, passwd = <span class="string">&#x27;123456&#x27;</span>, db = <span class="string">&#x27;RUNOOB&#x27;</span>, charset=<span class="string">&quot;utf8&quot;</span>)</span><br></pre></td></tr></table></figure>
 <p>来连接数据库。</p>
+<p>可以通过下面的代码来执行 mysql 语句。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取操作游标</span></span><br><span class="line">cursor = db.cursor()</span><br><span class="line"><span class="comment"># 要执行的 sql 语句</span></span><br><span class="line">cmd = <span class="string">&quot;&quot;&quot;INSERT INTO runoob_tbl (runoob_title, runoob_author, submission_date)</span></span><br><span class="line"><span class="string">  VALUES (&#x27;a&#x27;, &#x27;b&#x27;, NOW())&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> :</span><br><span class="line">  <span class="comment"># 执行 sql 语句</span></span><br><span class="line">  cursor.execute(cmd)</span><br><span class="line">  <span class="comment"># 将修改提交到数据库中，否则数据库的内容不会改变</span></span><br><span class="line">  db.commit()</span><br><span class="line"><span class="keyword">except</span> :</span><br><span class="line">  db.rollback()</span><br></pre></td></tr></table></figure>
+<p>查询的话先和上面一样用 <code>cursor.execute</code> 执行 <code>SELECT</code> 的语句，然后用下面三种方法中的任意一个来获得查询的结果：</p>
+<ul>
+<li><code>cursor.fetchone()</code> 获取下一个查询的结果，返回一个元组</li>
+<li><code>cursor.fetchall()</code> 获取所有的查询结果，会返回一些元组构成的元组</li>
+<li><code>cursor.rowcount</code> 返回执行 <code>execute()</code> 后影响的行数</li>
+</ul>
+<p>例如运行下面代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cmd = <span class="string">&quot;SELECT * FROM runoob_tbl&quot;</span></span><br><span class="line"></span><br><span class="line">cursor.execute(cmd)</span><br><span class="line">results = cursor.fetchall()</span><br><span class="line"></span><br><span class="line">results, <span class="built_in">type</span>(results)</span><br></pre></td></tr></table></figure>
+<p>然后得到：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(((<span class="number">1</span>, <span class="string">&#x27;学习 PHP&#x27;</span>, <span class="string">&#x27;菜鸟教程&#x27;</span>, datetime.date(<span class="number">2023</span>, <span class="number">7</span>, <span class="number">29</span>)),</span><br><span class="line">  (<span class="number">2</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, datetime.date(<span class="number">2023</span>, <span class="number">7</span>, <span class="number">29</span>))),</span><br><span class="line"> <span class="built_in">tuple</span>)</span><br></pre></td></tr></table></figure>
+<p>最后用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.close()</span><br></pre></td></tr></table></figure>
+<p>关闭数据库连接。</p>
 
             
         </div>
@@ -348,10 +401,10 @@
             
                 <div>
                     <span class="icon-brush"></span>
-                    11.5k
+                    12.4k
                     &nbsp;|&nbsp;
                     <span class="icon-coffee"></span>
-                    00:42
+                    00:45
                 </div>
             
             
