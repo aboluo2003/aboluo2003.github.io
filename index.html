@@ -125,16 +125,52 @@
         
     <div class="post-wrap-left">
         
-            <a class="post-link" href="/2024/03/18/gan/"></a>
+            <a class="post-link" href="/2024/04/06/unet/"></a>
         
         
         
         
             <div class="post-cover-left">
-                <img data-src="/covers/純粋 - vermillion.png" data-sizes="auto" alt="生成对抗网络学习笔记" class="lazyload">
+                <img data-src="/covers/幻像黒兎 - Trafalgar Square.jpg" data-sizes="auto" alt="UNet 学习笔记" class="lazyload">
             </div>
         
 
+        
+        <div class="post-info">
+            <div class="post-meta">
+                <a><span class="icon-calendar"></span>2024-04-06</a>
+                
+                    <a><span class="icon-pencil"></span>875 字</a>
+                
+                
+                    <a><span class="icon-clock"></span>3 分钟</a>
+                
+            </div>
+            <h2 class="post-title">UNet 学习笔记</h2>
+            <article class="post-article">
+                
+                    U-Net 主要改进 Ciresan 等人的做法中的两个缺点：效率低以及很难使用较大范围的局部信息，并同时继承其两项优点：对每个像素的类别进行预测，同时不需要大量的图片数据。
+U-Net 的架构如下
+
+对于图像边缘进行识别时，在卷积层中使用 zero-padding 的效果并不好，因此 UNet 的处理方式是对于输入的图像将边缘通过镜像的方式进行填充：
+
+在 U-Net 的架构中，左侧使用 conv 和 pooling 主要进行特征的提取。右侧则是将特征将与原始的网络进行融合，每一步首先将深层的特征进行上采样，然后与特征提取对应的网络进行拼接融合。由于 max pool 会丢失图像信息，这一步
+                
+            </article>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="post-wrap-right">
+        
+            <a class="post-link" href="/2024/03/18/gan/"></a>
+        
+        
+            <div class="post-cover-right">
+                <img data-src="/covers/純粋 - vermillion.png" data-sizes="auto" alt="生成对抗网络学习笔记" class="lazyload">
+            </div>
         
         <div class="post-info">
             <div class="post-meta">
@@ -158,14 +194,18 @@
 
     
         
-    <div class="post-wrap-right">
+    <div class="post-wrap-left">
         
             <a class="post-link" href="/2023/09/22/RL/"></a>
         
         
-            <div class="post-cover-right">
+        
+        
+            <div class="post-cover-left">
                 <img data-src="/covers/BODHI - 现世的霓虹.jpg" data-sizes="auto" alt="强化学习笔记" class="lazyload">
             </div>
+        
+
         
         <div class="post-info">
             <div class="post-meta">
@@ -196,18 +236,14 @@
 
     
         
-    <div class="post-wrap-left">
+    <div class="post-wrap-right">
         
             <a class="post-link" href="/2023/07/28/mysql/"></a>
         
         
-        
-        
-            <div class="post-cover-left">
+            <div class="post-cover-right">
                 <img data-src="/covers/純粋 - tangerinepeel helmet.png" data-sizes="auto" alt="MySql 简易教程" class="lazyload">
             </div>
-        
-
         
         <div class="post-info">
             <div class="post-meta">
@@ -231,14 +267,18 @@
 
     
         
-    <div class="post-wrap-right">
+    <div class="post-wrap-left">
         
             <a class="post-link" href="/2023/07/24/langchain/"></a>
         
         
-            <div class="post-cover-right">
+        
+        
+            <div class="post-cover-left">
                 <img data-src="/covers/BODHI - 深海少女.jpg" data-sizes="auto" alt="LangChain 学习笔记" class="lazyload">
             </div>
+        
+
         
         <div class="post-info">
             <div class="post-meta">
@@ -268,18 +308,14 @@
 
     
         
-    <div class="post-wrap-left">
+    <div class="post-wrap-right">
         
             <a class="post-link" href="/2023/07/11/git/"></a>
         
         
-        
-        
-            <div class="post-cover-left">
+            <div class="post-cover-right">
                 <img data-src="/covers/幻像黒兎 - 入秋.jpg" data-sizes="auto" alt="Git 使用教程" class="lazyload">
             </div>
-        
-
         
         <div class="post-info">
             <div class="post-meta">
@@ -303,14 +339,18 @@
 
     
         
-    <div class="post-wrap-right">
+    <div class="post-wrap-left">
         
             <a class="post-link" href="/2023/07/08/gpt/"></a>
         
         
-            <div class="post-cover-right">
+        
+        
+            <div class="post-cover-left">
                 <img data-src="/covers/幻像黒兎 - Journey.jpg" data-sizes="auto" alt="GPT 系列速览" class="lazyload">
             </div>
+        
+
         
         <div class="post-info">
             <div class="post-meta">
@@ -338,18 +378,14 @@ GPT 的架构使用 Transformer 解码器堆叠若干层，强调这里是解码
 
     
         
-    <div class="post-wrap-left">
+    <div class="post-wrap-right">
         
             <a class="post-link" href="/2023/07/05/bert/"></a>
         
         
-        
-        
-            <div class="post-cover-left">
+            <div class="post-cover-right">
                 <img data-src="/covers/BODHI - 今夕是何年.jpg" data-sizes="auto" alt="BERT 模型学习笔记" class="lazyload">
             </div>
-        
-
         
         <div class="post-info">
             <div class="post-meta">
@@ -376,14 +412,18 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
 
     
         
-    <div class="post-wrap-right">
+    <div class="post-wrap-left">
         
             <a class="post-link" href="/2023/07/04/word2vec-2/"></a>
         
         
-            <div class="post-cover-right">
+        
+        
+            <div class="post-cover-left">
                 <img data-src="/covers/BODHI - 再度阂眼多愿是一场噩梦.jpg" data-sizes="auto" alt="词嵌入 II" class="lazyload">
             </div>
+        
+
         
         <div class="post-info">
             <div class="post-meta">
@@ -407,14 +447,10 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
 
     
         
-    <div class="post-wrap-left">
+    <div class="post-wrap-right">
         
             <a class="post-link" href="/2023/07/03/word2vec/"></a>
         
-        
-        
-        
-
         
         <div class="post-info">
             <div class="post-meta">
@@ -437,38 +473,12 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
 
 
     
-        
-    <div class="post-wrap-right">
-        
-            <a class="post-link" href="/2023/06/27/hello-world/"></a>
-        
-        
-            <div class="post-cover-right">
-                <img data-src="/covers/anmi - ハイビスカス.jpg" data-sizes="auto" alt="Hello World" class="lazyload">
-            </div>
-        
-        <div class="post-info">
-            <div class="post-meta">
-                <a><span class="icon-calendar"></span>2023-06-27</a>
-                
-                    <a><span class="icon-pencil"></span>511 字</a>
-                
-                
-                    <a><span class="icon-clock"></span>1 分钟</a>
-                
-            </div>
-            <h2 class="post-title">Hello World</h2>
-            <article class="post-article">
-                
-                    hello hexo！
-                
-            </article>
-        </div>
-    </div>
 
 
-    
-
+    <nav id="page-nav">
+        
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+    </nav>
 
 
 </section>
@@ -483,15 +493,15 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
         <div class="sidebar-state">
             <div class="sidebar-state-article">
                 <div>文章</div>
-                <div class="sidebar-state-number">10</div>
+                <div class="sidebar-state-number">11</div>
             </div>
             <div class="sidebar-state-category">
                 <div>分类</div>
-                <div class="sidebar-state-number">2</div>
+                <div class="sidebar-state-number">3</div>
             </div>
             <div class="sidebar-state-tag">
                 <div>标签</div>
-                <div class="sidebar-state-number">7</div>
+                <div class="sidebar-state-number">9</div>
             </div>
         </div>
         <div class="sidebar-social">
@@ -538,7 +548,7 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B0/">论文复现</a></li></ul></li></ul>
         </div>
     </div>
 
@@ -548,7 +558,7 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">大模型</a> <a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 15px;">开发环境</a> <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">强化学习</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/" style="font-size: 20px;">自然语言处理</a> <a href="/tags/%E9%A2%84%E8%AE%AD%E7%BB%83/" style="font-size: 10px;">预训练</a>
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">大模型</a> <a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 15px;">开发环境</a> <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">强化学习</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">深度学习</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E7%94%9F%E6%88%90%E7%BD%91%E8%B7%AF/" style="font-size: 10px;">深度生成网路</a> <a href="/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/" style="font-size: 20px;">自然语言处理</a> <a href="/tags/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/" style="font-size: 10px;">语义分割</a> <a href="/tags/%E9%A2%84%E8%AE%AD%E7%BB%83/" style="font-size: 10px;">预训练</a>
         </div>
     </div>
 
@@ -558,7 +568,7 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a></li></ul>
         </div>
     </div>
 
@@ -588,10 +598,10 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
             
                 <div>
                     <span class="icon-brush"></span>
-                    18.9k
+                    19.8k
                     &nbsp;|&nbsp;
                     <span class="icon-coffee"></span>
-                    01:11
+                    01:14
                 </div>
             
             
@@ -618,15 +628,15 @@ ELMo（Embeddings from Language Models，来自语言模型的嵌入）：ELMo �
         <div class="sidebar-state">
             <div class="sidebar-state-article">
                 <div>文章</div>
-                <div class="sidebar-state-number">10</div>
+                <div class="sidebar-state-number">11</div>
             </div>
             <div class="sidebar-state-category">
                 <div>分类</div>
-                <div class="sidebar-state-number">2</div>
+                <div class="sidebar-state-number">3</div>
             </div>
             <div class="sidebar-state-tag">
                 <div>标签</div>
-                <div class="sidebar-state-number">7</div>
+                <div class="sidebar-state-number">9</div>
             </div>
         </div>
         <div class="sidebar-social">
