@@ -2844,6 +2844,16 @@ pre .javascript .function {
 .hidden-text:hover {
   background-color: inherit;
 }
+.hidden-text a {
+  color: #555; /* 默认字体颜色 */
+  -webkit-transition: color 0.3s ease;
+  -moz-transition: color 0.3s ease;
+  -ms-transition: color 0.3s ease;
+  transition: color 0.3s ease; /* 添加过渡效果 */
+}
+.hidden-text:hover a {
+  color: #ff5252; /* 鼠标悬停时的字体颜色 */
+}
 @media screen and (max-width: 959px) {
   #sidebar {
     display: none;
@@ -3056,6 +3066,7 @@ pre .javascript .function {
   height: 100%;
 }
 .icon-github,
+.icon-pixiv,
 .icon-google,
 .icon-facebook,
 .icon-twitter {
@@ -3070,8 +3081,14 @@ pre .javascript .function {
 .icon-github:before {
   content: "\f09b";
 }
-.icon-google {
+.icon-pixiv {
   color: #4285f4;
+}
+.icon-pixiv:before {
+  content: "\e640";
+}
+.icon-google {
+  color: #0096fa;
 }
 .icon-google:before {
   content: "\f0d5";
