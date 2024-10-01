@@ -21,7 +21,7 @@
     <meta name="description" content="考虑做一个图像分类问题，但是有一点不一样：我们首先在数据集 D1D_1D1​ 上进行训练，接着我们在数据集上 D2D_2D2​ 上训练，由于 D1D_1D1​ 和 D2D_2D2​ 都非常地大，我们不能将数据集完全保存下来，所以不能反复遍历 D1D_1D1​ 的数据来训练，只能记录一些东西，然后将 D1D_1D1​ 丢弃，接着我们会在数据集 D3D_3D3​ 上训练，并保持类似的限制，以此内推，最">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Learning to Prompt for Continual Learning 阅读笔记">
-<meta property="og:url" content="https://aboluo2003.github.io/2024/09/07/Learning-to-Prompt-for-Continual-Learning-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:url" content="https://aboluo2003.github.io/2024/09/07/learning-to-prompt/index.html">
 <meta property="og:site_name" content="aboluo2003&#39;s blog">
 <meta property="og:description" content="考虑做一个图像分类问题，但是有一点不一样：我们首先在数据集 D1D_1D1​ 上进行训练，接着我们在数据集上 D2D_2D2​ 上训练，由于 D1D_1D1​ 和 D2D_2D2​ 都非常地大，我们不能将数据集完全保存下来，所以不能反复遍历 D1D_1D1​ 的数据来训练，只能记录一些东西，然后将 D1D_1D1​ 丢弃，接着我们会在数据集 D3D_3D3​ 上训练，并保持类似的限制，以此内推，最">
 <meta property="og:locale" content="zh_CN">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://aboluo2003.github.io/assets/1727772685549.png">
 <meta property="og:image" content="https://aboluo2003.github.io/assets/1725717262947.png">
 <meta property="article:published_time" content="2024-09-07T12:38:12.000Z">
-<meta property="article:modified_time" content="2024-10-01T09:36:29.807Z">
+<meta property="article:modified_time" content="2024-10-01T09:39:23.566Z">
 <meta property="article:author" content="aboluo2003">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="Continual Learning">
@@ -129,12 +129,12 @@
 </header>
 
             <div id="content" class="outer">
-                <section id="main"><article id="post-Learning-to-Prompt-for-Continual-Learning-阅读笔记" class="h-entry article article-type-post"
+                <section id="main"><article id="post-learning-to-prompt" class="h-entry article article-type-post"
          itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
     <div class="article-inner">
         <div class="article-meta">
             <div class="article-date">
-    <a href="/2024/09/07/Learning-to-Prompt-for-Continual-Learning-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="article-date-link">
+    <a href="/2024/09/07/learning-to-prompt/" class="article-date-link">
         <time datetime="2024-09-07T12:38:12.000Z"
               itemprop="datePublished">2024-09-07</time>
     </a>
@@ -165,7 +165,7 @@
 <li>局部性：相邻区域有相邻的特征</li>
 <li>平移不变性：同样的物体，在不同的位置可以被相同的卷积核识别出来</li>
 </ul>
-<p>因此 CNN 训练并不需要太多的数据。而 Transformer 没有这一些归纳偏置，因此需要用更多的数据去训练。ViT 这篇的工作便是去验证在大数据集下，Transform 也能在 CV 领域取得更好的效果。</p>
+<p>因此 CNN 训练并不需要太多的数据。而 Transformer 没有这一些归纳偏置，因此需要用更多的数据去训练。ViT 这篇的工作便是去验证在大数据集下，Transform 也能在 CV 领域取得更好的效果。<span class="hidden-text"><del>省流：我们用更多的钱更多的数据去训练了更大的模型，所以它 work。</del></span></p>
 <img src="/assets/1727772685549.png" width="80%" alt="ViT 架构图">
 <p>为了解决图像的像素非常多，直接展平会导致计算复杂度很高的问题，ViT 先将图片进行分块，然后对于每个 patch，通过连接然后展平，通过线性投影将它压缩成一个 token：</p>
 <p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi mathvariant="bold">z</mi><mn>0</mn></msub><mo>=</mo><mo stretchy="false">[</mo><msub><mi mathvariant="bold">x</mi><mrow><mi mathvariant="normal">c</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">s</mi></mrow></msub><mo separator="true">;</mo><msubsup><mi mathvariant="bold">x</mi><mi>p</mi><mn>1</mn></msubsup><mi mathvariant="bold">E</mi><mo separator="true">;</mo><msubsup><mrow><mtext> </mtext><mi mathvariant="bold">x</mi></mrow><mi>p</mi><mn>2</mn></msubsup><mi mathvariant="bold">E</mi><mo separator="true">;</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">;</mo><msubsup><mrow><mtext> </mtext><mi mathvariant="bold">x</mi></mrow><mi>p</mi><mi>N</mi></msubsup><mi mathvariant="bold">E</mi><mo stretchy="false">]</mo><mo>+</mo><msub><mi mathvariant="bold">E</mi><mrow><mi>p</mi><mi>o</mi><mi>s</mi></mrow></msub><mo separator="true">,</mo><mspace width="1em"/><mi mathvariant="bold">E</mi><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mrow><mo stretchy="false">(</mo><msup><mi>P</mi><mn>2</mn></msup><mo>⋅</mo><mi>C</mi><mo stretchy="false">)</mo><mo>×</mo><mi>D</mi></mrow></msup><mo separator="true">,</mo><msub><mrow><mtext> </mtext><mi mathvariant="bold">E</mi></mrow><mrow><mi>p</mi><mi>o</mi><mi>s</mi></mrow></msub><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mrow><mo stretchy="false">(</mo><mi>N</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>×</mo><mi>D</mi></mrow></msup></mrow><annotation encoding="application/x-tex">\mathbf{z}_0=[\mathbf{x}_{\mathrm{class}};\mathbf{x}_p^1\mathbf{E};\mathbf{~x}_p^2\mathbf{E};\cdots;\mathbf{~x}_p^N\mathbf{E}]+\mathbf{E}_{pos},\quad\mathbf{E}\in\mathbb{R}^{(P^2\cdot C)\times D},\mathbf{~E}_{pos}\in\mathbb{R}^{(N+1)\times D}
@@ -189,11 +189,11 @@
             
         </div>
         <footer class="article-footer">
-            <a data-url="https://aboluo2003.github.io/2024/09/07/Learning-to-Prompt-for-Continual-Learning-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="cm1q41a5q0000gkt98loh6rg9" data-title="Learning to Prompt for Continual Learning 阅读笔记"
+            <a data-url="https://aboluo2003.github.io/2024/09/07/learning-to-prompt/" data-id="cm1q9c5d0000014t95x3j13r3" data-title="Learning to Prompt for Continual Learning 阅读笔记"
                class="article-share-link">分享</a>
             
-                <a href="/2024/09/07/Learning-to-Prompt-for-Continual-Learning-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/#comments" class="article-comment-link">
-                    <span class="post-comments-count valine-comment-count" data-xid="/2024/09/07/Learning-to-Prompt-for-Continual-Learning-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"
+                <a href="/2024/09/07/learning-to-prompt/#comments" class="article-comment-link">
+                    <span class="post-comments-count valine-comment-count" data-xid="/2024/09/07/learning-to-prompt/"
                           itemprop="commentCount"></span>
                     留言
                 </a>
@@ -380,7 +380,7 @@
             
                 <div>
                     <span class="icon-brush"></span>
-                    35.7k
+                    35.8k
                     &nbsp;|&nbsp;
                     <span class="icon-coffee"></span>
                     02:24
